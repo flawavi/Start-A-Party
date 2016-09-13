@@ -1,10 +1,5 @@
-//app.js is our entry file, our jumping off point
-"use strict";
+"use strict"
 
-//******************************************************************//
-// ngRoute is the name of the module inside the angular.min.js file
-// the same way that "TodoApp" is the name of the module in the app.js
-//******************************************************************//
 var app = angular.module("StartAParty", ["ngRoute", 'uiGmapgoogle-maps']);
     // .constant("FirebaseURL", "https://todoapp-5a055.firebaseio.com/");//definig a variable called Firebase with a value of a specific URL
 
@@ -38,6 +33,16 @@ app.config(function($routeProvider){
         .when("/startaparty", {
             templateUrl: "partials/party.html",
             controller: "StartAPartyCtrl"
+            // resolve: {isAuth}
+        })
+        .when("/pressthebutton", {
+            templateUrl: "partials/pressthebutton.html",
+            controller: "PressTheButtonCtrl"
+            // resolve: {isAuth}
+        })
+        .when("/geolocate", {
+            templateUrl: "partials/geolocate.html",
+            controller: "GeoLocateCtrl"
             // resolve: {isAuth}
         })
         //itemId is a placeholder for any ID. after item/: -

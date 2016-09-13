@@ -3,16 +3,15 @@
 <head>
   <link rel="stylesheet" type="text/css" href="lib/bower_components/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-  <link rel="stylesheet" type="text/css" href="styles/main.css">
+  <link rel="stylesheet" type="text/css" href="css/main.css">
   <title>Start-A-Party</title>
 </head>
 <body ng-app="StartAParty">
 
   <div class="container-fluid">
-    <div id="map"></div>
+
     <div class="row">
       <div class="text-center greeting">
-        <h1>Welcome to Start-A-Party</h1>
         <div ng-view></div>
       </div>
     </div>
@@ -23,7 +22,6 @@
 <script type="text/javascript" src='./lib/bower_components/angular/angular.min.js'></script>
 <script type="text/javascript" src="./lib/bower_components/angular-route/angular-route.min.js"></script>
 <script type="text/javascript" src='./lib/bower_components/angular-simple-logger/dist/angular-simple-logger.min.js'></script>
-
 <script type="text/javascript" src='./lib/bower_components/angular-google-maps/dist/angular-google-maps.min.js'></script>
 
 <script type="text/javascript" src="./lib/bower_components/jquery/dist/jquery.min.js"></script>
@@ -32,6 +30,8 @@
 <script type="text/javascript" src="./scripts/app.js"></script>
 <!-- <script type="text/javascript" src="scripts/testAPI.js"></script> -->
 <script type="text/javascript" src="./scripts/controllers/StartAPartyCtrl.js"></script>
+<script type="text/javascript" src="./scripts/controllers/PressTheButtonCtrl.js"></script>
+<script type="text/javascript" src="./scripts/controllers/GeoLocateCtrl.js"></script>
 
 
 </body>
