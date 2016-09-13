@@ -11,6 +11,8 @@ app.controller("GeoLocateCtrl", function($scope, $log, $timeout){
   $scope.coordsUpdates = 0;
   $scope.dynamicMoveCtr = 0;
   $scope.marker = {
+
+
     id: 0,
     coords: {
       latitude: 40.1451,
