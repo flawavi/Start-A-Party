@@ -30,6 +30,7 @@ app.controller("GeoLocateCtrl", function($scope){
             };
             console.log(position, "position")
             $scope.map = pos
+            console.log(pos, "pos")
 
             $scope.$apply() // checks for changes, runs angular digest process
             // infoWindow.setPosition(pos);
