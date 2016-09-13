@@ -7,8 +7,16 @@
   <title>Start-A-Party</title>
 </head>
 <body ng-app="StartAParty">
-  <h1 class="header">Welcome to Start-A-Party</h1>
-    <button id="clickme">Click Me</button>
+
+  <div class="container-fluid">
+    <div id="map"></div>
+    <div class="row">
+      <div class="text-center greeting">
+        <h1>Welcome to Start-A-Party</h1>
+      </div>
+    </div>
+  </div>
+
 
 <script type="text/javascript" src="lib/bower_components/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript" src="lib/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -16,5 +24,9 @@
 <script type="text/javascript" src="lib/bower_components/angular-route/angular-route.min.js"></script>
 <script type="text/javascript" src="lib/bower_components/firebase/firebase.js"></script>
 <script type="text/javascript" src="scripts/app.js"></script>
+<script type="text/javascript" src="scripts/testAPI.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7gLjZhbyownAb4bBq6eHZ85jQFP36Rr8&callback=initMap"
+    async defer></script>
+
 </body>
 </html>
