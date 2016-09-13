@@ -5,7 +5,7 @@
 // ngRoute is the name of the module inside the angular.min.js file
 // the same way that "TodoApp" is the name of the module in the app.js
 //******************************************************************//
-var app = angular.module("StartAParty", ["ngRoute"])
+var app = angular.module("StartAParty", ["ngRoute", 'uiGmapgoogle-maps']);
     // .constant("FirebaseURL", "https://todoapp-5a055.firebaseio.com/");//definig a variable called Firebase with a value of a specific URL
 
 // let isAuth = (AuthFactory) => new Promise((resolve, reject) => {
@@ -36,8 +36,8 @@ app.config(function($routeProvider){
             // resolve: {isAuth}
         })
         .when("/startaparty", {
-            templateUrl: "partials/big-button.html",
-            controller: "StartAPartyCtrl",
+            templateUrl: "partials/party.html",
+            controller: "StartAPartyCtrl"
             // resolve: {isAuth}
         })
         //itemId is a placeholder for any ID. after item/: -
@@ -63,14 +63,22 @@ app.config(function($routeProvider){
 
 });
 
+app.config(function(uiGmapGoogleMapApiProvider) {
+  uiGmapGoogleMapApiProvider.configure({
+    key: 'AIzaSyB7gLjZhbyownAb4bBq6eHZ85jQFP36Rr8',
+    v: '3.20', //defaults to latest 3.X anyhow
+    libraries: 'weather,geometry,visualization'
+  });
+})
 
 
-app.run(($location, FBCreds) => {
-  let creds = FBCreds;
-  let authConfig = {
-        apiKey: creds.key,
-        authDomain: creds.authDomain
-      };
-      firebase.initializeApp(authConfig);
-});
+
+// app.run(($location, FBCreds) => {
+//   let creds = FBCreds;
+//   let authConfig = {
+//         apiKey: creds.key,
+//         authDomain: creds.authDomain
+//       };
+//       firebase.initializeApp(authConfig);
+// });
 
