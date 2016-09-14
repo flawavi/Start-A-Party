@@ -36,8 +36,8 @@ app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location){
         resolve(profileObjFromFirebase)
       })
     })
-
   }
+
     return {postProfile, deleteProfile, patchProfile}
 })
 

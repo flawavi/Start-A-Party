@@ -11,8 +11,8 @@ app.controller("ProfileCtrl", function($scope, ProfileFactory, $location){
     age: ""
   }
 
-    $scope.createProfile = () => {
-      console.log("create profile hello")
+  $scope.createProfile = () => {
+    console.log("create profile hello")
     ProfileFactory.postProfile($scope.newUserProfile)
     .then(() => {
       console.log($scope.newUserProfile, "newUserProfile")
@@ -25,7 +25,7 @@ app.controller("ProfileCtrl", function($scope, ProfileFactory, $location){
     ProfileFactory.patchProfile($scope.newUserProfile)
     .then(() => {
       console.log($scope.newUserProfile, "edited profile")
-      $location.url("my-profile")
+      $location.url("profile")
     })
   }
 
