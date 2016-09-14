@@ -16,25 +16,17 @@ app.factory("PartyFactory", function($q, $http, FirebaseURL, $location){
       })
     }
 
-    let createProfile = (newProfile) => {
-    return $q((resolve, reject) => {
-      $http.post(`${FirebaseURL}/profiles.json`,
-        JSON.stringify(newProfile))
-      console.log(newProfile, "new Profile")
-        .success((profileObjFromFirebase) => {
-          resolve(profileObjFromFirebase)
-        })
-        .error((error) => {
-          reject(error)
-        })
-      })
-    }
-
   let editParty = () => {
 
   }
 
   let deleteParty = () => {
+    return $q((resolve, reject) => {
+      $http.delete(`${FirebaseURL}parties/${partyId}.json`)
+      .success((partyObjFromFirebase) => {
+        resolve(partyObjFromFirebase)
+      })
+    })
 
   }
   return {createParty, editParty, deleteParty}
