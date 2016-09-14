@@ -1,24 +1,28 @@
 <h1>{{title}}</h1>
 <form>
   <div class="form-group">
-    <label>Who's throwing this rager?</label>
+    <label>Who is throwing this rager?</label>
     <input type="text" class="form-control" placeholder="host name" ng-model="newParty.hostName"/>
   </div>
+
   <div class="form-group">
     <label>Is there a theme?</label>
     <input type="text" class="form-control" placeholder="everyone loves a good theme" ng-model="newParty.theme"/>
   </div>
+
   <div class="form-group">
     <label>When should people leave (if ever)?</label>
-    <input type="text" class="form-control" placeholder="how deep does the rabbit hole go?" ng-model="newParty.hours"/>
+    <input type="text" class="form-control" placeholder="how deep does the rabbit hole go?" ng-model="newParty.finishTime"/>
   </div>
+
   <div class="form-group">
     <label>What's the occasion?</label>
-    <input type="text" class="form-control" placeholder="holiday? birthday? tuesday?" ng-model="newParty.occasion"/>
+    <input type="text" class="form-control" placeholder="is this a holiday? birthday? whatever?" ng-model="newParty.occasion"/>
   </div>
+
   <div class="form-group">
     <label>Where is this epic rager?</label>
-    <input type="text" class="form-control" placeholder="your house? apartment? somewhere in the woods?" ng-model="newParty.location"/>
+    <input type="text" class="form-control" placeholder="is this at your house? your apartment? somewhere in the woods?" ng-model="newParty.location"/>
   </div>
 
   <button type="" class="btn btn-default" ng-click="startParty()">Party On</button>
