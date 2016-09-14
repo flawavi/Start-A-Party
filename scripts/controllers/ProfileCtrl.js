@@ -1,6 +1,6 @@
 "use strict"
 
-app.controller("ProfileCtrl", function($scope){
+app.controller("ProfileCtrl", function($scope, ProfileFactory, $location){
 
   $scope.title = "Create a profile"
 
@@ -11,12 +11,13 @@ app.controller("ProfileCtrl", function($scope){
     age: ""
   }
 
-    $scope.createProfile = function(){
-    // ItemStorage.postNewItem($scope.newUserProfile)
-    // .then(function() {
-    //   //use locatino to pass in route back to items list
-    //   $location.url("/items/list");
-    // });
+    $scope.createProfile = () => {
+      console.log("create profile hello")
+    ProfileFactory.createProfile($scope.newUserProfile)
+    .then(function() {
+      console.log($scope.newUserProfile, "newUserProfile")
+      $location.url("/startaparty");
+    });
   };
 
 })

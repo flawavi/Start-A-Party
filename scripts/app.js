@@ -30,11 +30,6 @@ app.config(function($routeProvider){
             controller: "ProfileCtrl",
             // resolve: {isAuth}
         })
-        .when("/startaparty", {
-            templateUrl: "partials/party.html",
-            controller: "StartAPartyCtrl"
-            // resolve: {isAuth}
-        })
         .when("/pressthebutton", {
             templateUrl: "partials/pressthebutton.html",
             controller: "PressTheButtonCtrl"
@@ -43,6 +38,11 @@ app.config(function($routeProvider){
         .when("/geolocate", {
             templateUrl: "partials/geolocate.html",
             controller: "GeoLocateCtrl"
+            // resolve: {isAuth}
+        })
+        .when("/party-form", {
+            templateUrl: "partials/party-form.html",
+            controller: "StartAPartyCtrl"
             // resolve: {isAuth}
         })
         .otherwise("/");
