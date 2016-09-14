@@ -2,7 +2,7 @@
 
 app.factory("PartyFactory", function($q, $http, FirebaseURL, $location){
 
-  let createParty = (newParty) => {
+  let postParty = (newParty) => {
     return $q((resolve, reject) => {
       $http.post(`${FirebaseURL}/parties.json`,
         JSON.stringify(newParty))
@@ -16,11 +16,22 @@ app.factory("PartyFactory", function($q, $http, FirebaseURL, $location){
       })
     }
 
-  let editParty = () => {
-
+  let patchParty = (partyId, updatedParty) => {
+    return $q((resolve, reject) => {
+      $http.patch(`${FirebaseURL}/parties.${partyId}.json`,
+        JSON.stringify(updatedParty))
+      console.log(updatedParty, "updated Party")
+      .success((partyObjFromFirebase) => {
+        $location.path("/home")
+      })
+      .error((error) => {
+        reject(error)
+      })
+    })
   }
 
-  let deleteParty = () => {
+
+  let deleteParty = (partyId) => {
     return $q((resolve, reject) => {
       $http.delete(`${FirebaseURL}parties/${partyId}.json`)
       .success((partyObjFromFirebase) => {
@@ -29,6 +40,6 @@ app.factory("PartyFactory", function($q, $http, FirebaseURL, $location){
     })
 
   }
-  return {createParty, editParty, deleteParty}
+  return {postParty, patchParty, deleteParty}
 
 })

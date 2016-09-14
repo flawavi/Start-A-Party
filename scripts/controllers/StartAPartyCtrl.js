@@ -16,7 +16,7 @@ app.controller("StartAPartyCtrl", function($scope, $location, uiGmapGoogleMapApi
 
   $scope.startParty = () => {
     console.log("party party party")
-    PartyFactory.createParty($scope.newParty)
+    PartyFactory.postParty($scope.newParty)
     .then(function() {
       console.log($scope.newParty, "newParty")
       $location.url("/home")
