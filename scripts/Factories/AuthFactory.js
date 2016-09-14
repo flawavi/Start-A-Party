@@ -6,11 +6,11 @@ app.factory("AuthFactory", function($q){
   let createUser = (userObj) => {
     //all firebase interactions with sdk return promises themselves,
     //so we dont have to write promises explicity
+    console.log(userObj, "userObj")
     return firebase.auth().createUserWithEmailAndPassword(userObj.email, userObj.password)
-    .catch((error)=>{
+    .catch((error) => {
       let errorCode = error.code,
           errorMessage = error.message
-
     })
   }
 
