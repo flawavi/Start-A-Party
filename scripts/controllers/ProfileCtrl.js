@@ -16,8 +16,17 @@ app.controller("ProfileCtrl", function($scope, ProfileFactory, $location){
     ProfileFactory.postProfile($scope.newUserProfile)
     .then(() => {
       console.log($scope.newUserProfile, "newUserProfile")
-      $location.url("/party-form");
-    });
-  };
+      $location.url("/party-form")
+    })
+  }
+
+  $scope.editProfile = () => {
+    console.log("edit profile button clicked")
+    ProfileFactory.patchProfile($scope.newUserProfile)
+    .then(() => {
+      console.log($scope.newUserProfile, "edited profile")
+      $location.url("my-profile")
+    })
+  }
 
 })

@@ -45,6 +45,11 @@ app.config(function($routeProvider){
             controller: "StartAPartyCtrl"
             // resolve: {isAuth}
         })
+        .when("/my-profile", {
+            templateUrl: "partials/my-profile.html",
+            controller: "MyProfileCtrl"
+            // resolve: {isAuth}
+        })
         .otherwise("/");
 
 });
