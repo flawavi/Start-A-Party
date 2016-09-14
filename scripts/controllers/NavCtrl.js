@@ -1,6 +1,6 @@
 "use strict"
 
-app.controller("NavCtrl", function($scope, SearchTermData, $location){
+app.controller("NavCtrl", function($scope, $location){
     $scope.navItems = [
         {name: "Logout", url: "#/logout", showState: "$parent.isLoggedIn"},
         {name: "Login", url: "#/login", showState: "!$parent.isLoggedOut"},

@@ -6,8 +6,8 @@ app.factory("PartyFactory", function($q, $http, FirebaseURL, $location){
     return $q((resolve, reject) => {
       $http.post(`${FirebaseURL}/parties.json`,
         JSON.stringify(newParty))
-      console.log(newParty, "new Party")
         .success((partyObjFromFirebase) => {
+      console.log(partyObjFromFirebase, "new Party")
           resolve(partyObjFromFirebase)
           })
         .error((error) => {

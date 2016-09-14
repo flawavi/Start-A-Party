@@ -13,10 +13,10 @@ app.controller("ProfileCtrl", function($scope, ProfileFactory, $location){
 
     $scope.createProfile = () => {
       console.log("create profile hello")
-    ProfileFactory.createProfile($scope.newUserProfile)
-    .then(function() {
+    ProfileFactory.postProfile($scope.newUserProfile)
+    .then(() => {
       console.log($scope.newUserProfile, "newUserProfile")
-      $location.url("/startaparty");
+      $location.url("/party-form");
     });
   };
 

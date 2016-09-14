@@ -6,8 +6,8 @@ app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location){
     return $q((resolve, reject) => {
       $http.post(`${FirebaseURL}/profiles.json`,
         JSON.stringify(newProfile))
-      console.log(newProfile, "new Profile")
         .success((objFromFirebase) => {
+      console.log(objFromFirebase, "new Profile object")
           resolve(objFromFirebase)
         })
         .error((error) => {

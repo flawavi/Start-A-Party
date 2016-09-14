@@ -6,7 +6,7 @@ app.controller("GeoLocateCtrl", function($scope, $log, $timeout){
       // failed.", it means you probably did not give permission for the browser to
       // locate you.
       $scope.message = "hello"
-  $scope.map = { center: { latitude: -17.7134, longitude: 178.0650 }, zoom: 8}
+  $scope.map = { center: { latitude: 11.8251, longitude: 42.5903 }, zoom: 8}
   $scope.options = {scrollwheel: false};
   $scope.coordsUpdates = 0;
   $scope.dynamicMoveCtr = 0;
@@ -73,7 +73,7 @@ app.controller("GeoLocateCtrl", function($scope, $log, $timeout){
           latitude: position.coords.latitude,
           longitude: position.coords.longitude},
 
-          zoom: 8
+          zoom: 20
 
         };
         console.log(position, "position")

@@ -19,7 +19,7 @@ app.controller("StartAPartyCtrl", function($scope, $location, uiGmapGoogleMapApi
     PartyFactory.postParty($scope.newParty)
     .then(function() {
       console.log($scope.newParty, "newParty")
-      $location.url("/home")
+      $location.url("/geolocate")
     })
   }
 
