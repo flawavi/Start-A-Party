@@ -5,7 +5,7 @@ app.controller("GeoLocateCtrl", function($scope, $log, $timeout){
       // prompted by your browser. If you see the error "The Geolocation service
       // failed.", it means you probably did not give permission for the browser to
       // locate you.
-
+      $scope.message = "hello"
   $scope.map = { center: { latitude: -17.7134, longitude: 178.0650 }, zoom: 8}
   $scope.options = {scrollwheel: false};
   $scope.coordsUpdates = 0;

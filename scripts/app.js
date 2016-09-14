@@ -1,7 +1,7 @@
 "use strict"
 
-var app = angular.module("StartAParty", ["ngRoute", 'uiGmapgoogle-maps']);
-    // .constant("FirebaseURL", "https://todoapp-5a055.firebaseio.com/");//definig a variable called Firebase with a value of a specific URL
+var app = angular.module("StartAParty", ["ngRoute", 'uiGmapgoogle-maps'])
+    .constant("FirebaseURL", "https://start-a-party.firebaseio.com/");//definig a variable called Firebase with a value of a specific URL
 
 // let isAuth = (AuthFactory) => new Promise((resolve, reject) => {
 // //isAuthenticated returns a boolean
@@ -45,25 +45,6 @@ app.config(function($routeProvider){
             controller: "GeoLocateCtrl"
             // resolve: {isAuth}
         })
-        //itemId is a placeholder for any ID. after item/: -
-        //anything after colon will be saved in a variable called itemId
-        // .when("/items/view/:itemId", {
-        //     templateUrl: "partials/item-details.html",
-        //     controller: "ItemViewCtrl",
-        //     // resolve: {isAuth}
-        // })
-        // .when("/items/view/:itemId/edit", {
-        //   templateUrl: "partials/item-form.html",
-        //   controller: "ItemEditCtrl",
-        //   // resolve: {isAuth}
-        // })
-        // .when("/items/edit/:itemId", {
-        //     templateUrl: "partials/item-form-edit.html",
-        //     controller: "ItemEditCtrl",
-        //     resolve: {isAuth}
-        // })
-        //if user tries to reroute to somewhere else,
-        //it sends them back home/login
         .otherwise("/");
 
 });
@@ -78,12 +59,12 @@ app.config(function(uiGmapGoogleMapApiProvider) {
 
 
 
-// app.run(($location, FBCreds) => {
-//   let creds = FBCreds;
-//   let authConfig = {
-//         apiKey: creds.key,
-//         authDomain: creds.authDomain
-//       };
-//       firebase.initializeApp(authConfig);
-// });
+app.run(($location, FBCreds) => {
+  let creds = FBCreds;
+  let authConfig = {
+    apiKey: creds.apiKey,
+    authDomain: creds.authDomain
+    };
+    firebase.initializeApp(authConfig);
+});
 
