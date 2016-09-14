@@ -5,21 +5,21 @@ app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location){
   let postProfile = (newProfile) => {
     return $q((resolve, reject) => {
       $http.post(`${FirebaseURL}/profiles.json`,
-        JSON.stringify(newProfile))
-        .success((objFromFirebase) => {
-      console.log(objFromFirebase, "new Profile object")
-          resolve(objFromFirebase)
-        })
-        .error((error) => {
-          reject(error)
-        })
+      JSON.stringify(newProfile))
+      .success((objFromFirebase) => {
+        console.log(objFromFirebase, "new Profile object")
+        resolve(objFromFirebase)
       })
-    }
+      .error((error) => {
+        reject(error)
+      })
+    })
+  }
 
   let patchProfile = (profileId, updatedProfile) => {
     return $q((resolve, reject) => {
       $http.patch(`${FirebaseURL}/profiles.${profileId}.json`,
-        JSON.stringify(updatedProfile))
+      JSON.stringify(updatedProfile))
       .success((profileObjFromFirebase) => {
         $location.path("/home")
       })
@@ -38,7 +38,12 @@ app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location){
     })
   }
 
-    return {postProfile, deleteProfile, patchProfile}
+  return {
+    postProfile,
+    deleteProfile,
+    patchProfile
+  }
+
 })
 
 

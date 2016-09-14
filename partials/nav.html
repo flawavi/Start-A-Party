@@ -1,5 +1,5 @@
-<!-- TODO: Add a nav controller -->
-<nav class="navbar navbar-default" ng-controller="NavCtrl"> <!-- still keep NavCtrl so that functionality works when navbar is injected (which it will be at all times, bc navbar) -->
+
+<nav class="navbar navbar-default" ng-controller="NavCtrl">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
@@ -11,7 +11,6 @@
       <a class="navbar-brand" href="#">Start A Party</a>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <!-- TODO: Use Angular to loop through nav items -->
       <ul class="nav navbar-nav navbar-right">
         <li ng-show="!$parent.isLoggedIn"><a ng-href="#/login">Login</a></li>
         <li ng-show="$parent.isLoggedIn"><a ng-href="#/party-form">Start A Party</a></li>

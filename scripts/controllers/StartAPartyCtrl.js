@@ -2,8 +2,16 @@
 
 app.controller("StartAPartyCtrl", function($scope, $location, uiGmapGoogleMapApi, PartyFactory){
 
-  $scope.map = { center: { latitude: 36.1627, longitude: -86.7816 }, zoom: 8}
   $scope.title = "Party Details"
+
+  $scope.map = {
+    center:
+    {
+      latitude: 36.1627, longitude: -86.7816
+    },
+    zoom: 8}
+
+
   $scope.newParty = {
 
     hostName: "",

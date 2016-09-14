@@ -17,7 +17,8 @@ app.controller("LoginCtrl", function($scope, $window, AuthFactory){
     .then((userData)=>{
       console.log(userData)
       $scope.login()
-    }, (error)=>{
+    },
+    (error) => {
       console.log(`Error creating user: ${error}`)
     })
   }
@@ -27,12 +28,13 @@ app.controller("LoginCtrl", function($scope, $window, AuthFactory){
     AuthFactory.loginUser($scope.account)
     .then((data) => {
       if(data) {
-      $window.location.href = "#/profile"
+        $window.location.href = "#/profile"
       } else {
-      $window.location.href = "#/login"
+        $window.location.href = "#/login"
       }
       console.log("data", data)
-    }, (error) => {
+    },
+    (error) => {
       console.log("hello error", error)
     })
   }
