@@ -3,52 +3,43 @@
 var app = angular.module("StartAParty", ["ngRoute", 'uiGmapgoogle-maps'])
     .constant("FirebaseURL", "https://start-a-party.firebaseio.com/")
 
-// let isAuth = (AuthFactory) => new Promise((resolve, reject) => {
-// //isAuthenticated returns a boolean
-//   if (AuthFactory.isAuthenticated()) {
-//     resolve();
-//   } else {
-//     reject();
-//   }
-// });
-
 app.config(function($routeProvider){
-    $routeProvider
+  $routeProvider
 
-        .when("/", {
-          templateUrl: "partials/login.html",
-          controller: "LoginCtrl"
-        })
-        .when("/login", {
-          templateUrl: "partials/login.html",
-          controller: "LoginCtrl"
-        })
-        .when("/profile", {
-            templateUrl: "partials/profile.html",
-            controller: "ProfileCtrl",
-            // resolve: {isAuth}
-        })
-        .when("/pressthebutton", {
-            templateUrl: "partials/pressthebutton.html",
-            controller: "PressTheButtonCtrl"
-            // resolve: {isAuth}
-        })
-        .when("/geolocate", {
-            templateUrl: "partials/geolocate.html",
-            controller: "GeoLocateCtrl"
-            // resolve: {isAuth}
-        })
-        .when("/party-form", {
-            templateUrl: "partials/party-form.html",
-            controller: "StartAPartyCtrl"
-            // resolve: {isAuth}
-        })
-        .when("/my-profile", {
-            templateUrl: "partials/my-profile.html",
-            controller: "MyProfileCtrl"
-            // resolve: {isAuth}
-        })
-        .otherwise("/");
+  .when("/", {
+    redirectTo: "/login"
+    })
+  .when("/login", {
+    templateUrl: "partials/login.html",
+    controller: "LoginCtrl",
+    redirectAuth: "/profile"
+  })
+  .when("/profile", {
+    templateUrl: "partials/profile.html",
+    controller: "ProfileCtrl",
+    requireAuth: true
+  })
+  .when("/pressthebutton", {
+    templateUrl: "partials/pressthebutton.html",
+    controller: "PressTheButtonCtrl",
+    requireAuth: true
+  })
+  .when("/geolocate", {
+    templateUrl: "partials/geolocate.html",
+    controller: "GeoLocateCtrl",
+    requireAuth: true
+  })
+  .when("/party-form", {
+    templateUrl: "partials/party-form.html",
+    controller: "StartAPartyCtrl",
+    requireAuth: true
+  })
+  .when("/my-profile", {
+    templateUrl: "partials/my-profile.html",
+    controller: "MyProfileCtrl",
+    requireAuth: true
+  })
+  .otherwise("/");
 
 });
 
@@ -70,4 +61,24 @@ app.run(($location, FBCreds) => {
     };
     firebase.initializeApp(authConfig)
 });
+
+// requireAuth helper
+app.run(function($rootScope, $location, AuthFactory) {
+  $rootScope.$on("$routeChangeStart", (evt, next, curr) => {
+    if (!next.$$route || !next.$$route.requireAuth) return
+    if (AuthFactory.isAuthenticated()) return
+    $location.path("/login")
+
+  })
+})
+
+// redirectAuth helper
+app.run(function($rootScope, $location, AuthFactory) {
+  $rootScope.$on("$routeChangeStart", (evt, next, curr) => {
+    if (!next.$$route || !next.$$route.redirectAuth) return
+    if (!AuthFactory.isAuthenticated()) return
+    $location.path(next.$$route.redirectAuth)
+
+  })
+})
 
