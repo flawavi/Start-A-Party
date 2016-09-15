@@ -1,6 +1,7 @@
 "use strict"
 
-app.controller("ProfileCtrl", function($scope, ProfileFactory, $location){
+app.controller("ProfileCtrl", function($scope, ProfileFactory, $location, currentUser){
+  console.log(currentUser, "CURRENTUSER")
 
   $scope.title = "Create a profile"
 

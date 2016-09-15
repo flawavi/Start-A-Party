@@ -1,6 +1,10 @@
 "use strict"
 
-app.factory("AuthFactory", function($q){
+app.factory("AuthFactory", function() {
+
+  let service,
+      initialized = false
+
 
   let createUser = userObj => {
     console.log(userObj, "userObj")
@@ -15,10 +19,24 @@ app.factory("AuthFactory", function($q){
     return firebase.auth().signOut()
   }
 
-  let isAuthenticated = () => {
-    return (firebase.auth().currentUser) ? true : false
+  let currentUser = () => {
+    return new Promise ((resolve, reject) => {
+      if (initialized) return resolve(firebase.auth().currentUser)
+      let unsubscribe = firebase.auth().onAuthStateChanged(user => {
+        unsubscribe()
+        resolve(user)
+      }, error => {
+        initialized = true
+        unsubscribe()
+        reject(error)
+      })
+    })
   }
 
-  return {createUser, loginUser, logoutUser, isAuthenticated}
+  let isAuthenticated = () => currentUser.then(user => !!user)
+
+  service = {currentUser, createUser, loginUser, logoutUser, isAuthenticated}
+
+  return service
 
 })

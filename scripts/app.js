@@ -1,23 +1,38 @@
 "use strict"
 
-var app = angular.module("StartAParty", ["ngRoute", 'uiGmapgoogle-maps'])
-    .constant("FirebaseURL", "https://start-a-party.firebaseio.com/")
+const app = angular.module("StartAParty", ["ngRoute", 'uiGmapgoogle-maps'])
+  .constant("FirebaseURL", "https://start-a-party.firebaseio.com/")
+
+const currentUser = AuthFactory => AuthFactory.currentUser()
+
+const requireCurrentUser = AuthFactory => AuthFactory.currentUser().then(user => {
+  if (!user) throw new Error('NO_CURRENT_USER')
+})
+
+const redirectCurrentUser = AuthFactory => AuthFactory.currentUser().then(user => {
+  if (user) throw new Error('CURRENT_USER')
+})
 
 app.config(function($routeProvider){
   $routeProvider
-
   .when("/", {
     redirectTo: "/login"
-    })
+  })
   .when("/login", {
     templateUrl: "partials/login.html",
     controller: "LoginCtrl",
-    redirectAuth: "/profile"
+    redirectAuth: "/profile",
+    resolve: {
+      redirectCurrentUser
+    }
   })
   .when("/profile", {
     templateUrl: "partials/profile.html",
     controller: "ProfileCtrl",
-    requireAuth: true
+    resolve: {
+      currentUser,
+      requireCurrentUser
+    }
   })
   .when("/pressthebutton", {
     templateUrl: "partials/pressthebutton.html",
@@ -39,9 +54,8 @@ app.config(function($routeProvider){
     controller: "MyProfileCtrl",
     requireAuth: true
   })
-  .otherwise("/");
-
-});
+  .otherwise("/")
+})
 
 app.config(function(uiGmapGoogleMapApiProvider) {
   uiGmapGoogleMapApiProvider.configure({
@@ -51,34 +65,27 @@ app.config(function(uiGmapGoogleMapApiProvider) {
   })
 })
 
-
-
 app.run(($location, FBCreds) => {
   let creds = FBCreds
   let authConfig = {
     apiKey: creds.apiKey,
     authDomain: creds.authDomain
-    };
-    firebase.initializeApp(authConfig)
-});
+  }
+  firebase.initializeApp(authConfig)
+})
 
-// requireAuth helper
-app.run(function($rootScope, $location, AuthFactory) {
-  $rootScope.$on("$routeChangeStart", (evt, next, curr) => {
-    if (!next.$$route || !next.$$route.requireAuth) return
-    if (AuthFactory.isAuthenticated()) return
+app.run(function($rootScope, $location) {
+  $rootScope.$on("$routeChangeError", (evt, curr, prev, err) => {
+    if (!err || err.message !== 'NO_CURRENT_USER') return
     $location.path("/login")
-
   })
 })
 
-// redirectAuth helper
-app.run(function($rootScope, $location, AuthFactory) {
-  $rootScope.$on("$routeChangeStart", (evt, next, curr) => {
-    if (!next.$$route || !next.$$route.redirectAuth) return
-    if (!AuthFactory.isAuthenticated()) return
-    $location.path(next.$$route.redirectAuth)
-
+app.run(function($rootScope, $location) {
+  $rootScope.$on("$routeChangeError", (evt, curr, prev, err) => {
+    if (!err || err.message !== 'CURRENT_USER') return
+    console.log('DAFUQ', curr, prev, err)
+    if (!curr.$$route || !curr.$$route.redirectAuth) return
+    $location.path(curr.$$route.redirectAuth)
   })
 })
-
