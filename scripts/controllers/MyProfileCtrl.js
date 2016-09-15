@@ -10,7 +10,7 @@ app.controller("MyProfileCtrl", function($scope, $location, ProfileFactory, Auth
     userName: "",
     city: "",
     age: "",
-    userId: null
+    userID: null
   }
 
   $scope.editProfile = () => {

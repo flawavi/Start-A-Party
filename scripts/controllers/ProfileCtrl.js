@@ -9,8 +9,7 @@ app.controller("ProfileCtrl", function($scope, ProfileFactory, $location, curren
     name: "",
     userName: "",
     city: "",
-    age: "",
-    userID: null
+    age: ""
   }
 
   $scope.createProfile = () => {

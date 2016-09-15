@@ -2,6 +2,22 @@
 
 app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location, AuthFactory){
 
+  let postProfile = (newProfile) => {
+    newProfile.uid = AuthFactory.getUser().uid
+    console.log("newProfile", newProfile)
+    return $q((resolve, reject) => {
+      $http.post(`${FirebaseURL}/profiles.json`,
+      JSON.stringify(newProfile))
+      .success((objFromFirebase) => {
+        console.log(objFromFirebase, "new Profile object")
+        resolve(objFromFirebase)
+      })
+      .error((error) => {
+        reject(error)
+      })
+    })
+  }
+
     let getProfiles = (userId) => {
       console.log(userId)
       let profiles = []
@@ -24,21 +40,6 @@ app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location, AuthFa
   }
 
 
-  let postProfile = (newProfile) => {
-    newProfile.uid = AuthFactory.getUser().uid;
-    console.log("newProfile", newProfile)
-    return $q((resolve, reject) => {
-      $http.post(`${FirebaseURL}/profiles.json`,
-      JSON.stringify(newProfile))
-      .success((objFromFirebase) => {
-        console.log(objFromFirebase, "new Profile object")
-        resolve(objFromFirebase)
-      })
-      .error((error) => {
-        reject(error)
-      })
-    })
-  }
 
   let patchProfile = (profileId, updatedProfile) => {
     return $q((resolve, reject) => {
