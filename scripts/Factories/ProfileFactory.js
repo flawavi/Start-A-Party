@@ -2,6 +2,25 @@
 
 app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location){
 
+    let getProfile = (userId) => {
+    return $q((resolve, reject) => {
+      console.log(userId);
+      $http.get(`${FirebaseURL}profiles.json`)
+      .success((profileObj)=>{
+        console.log(profileObj, "profileObj");
+        if (profileObj !== null){
+          resolve(profileObj)
+        } else {
+          console.log(profileObj, "profile");
+          resolve(profileObj)
+        }
+      })
+      .error((error) => {
+        reject(error);
+      })//.success does parsing for us
+    })
+  }
+
   let postProfile = (newProfile) => {
     return $q((resolve, reject) => {
       $http.post(`${FirebaseURL}/profiles.json`,

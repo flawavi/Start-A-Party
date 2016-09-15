@@ -12,10 +12,9 @@
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <li ng-show="!$parent.isLoggedIn"><a ng-href="#/login">Login</a></li>
-        <li ng-show="$parent.isLoggedIn"><a ng-href="#/party-form">Start A Party</a></li>
-        <li ng-show="$parent.isLoggedIn"><a ng-href="#/userprofile">Your Profile</a></li>
-        <li ng-show="$parent.isLoggedIn"><button ng-click="logout()">Logout</button></li>
+        <li ng-show="isLoggedIn"><a ng-href="#/party-form">Start A Party</a></li>
+        <li ng-show="isLoggedIn"><a ng-href="#/userprofile">Your Profile</a></li>
+        <li ng-show="isLoggedIn"><a ng-click="logout()">Logout</a></li>
       </ul>
     </div>
   </div>
