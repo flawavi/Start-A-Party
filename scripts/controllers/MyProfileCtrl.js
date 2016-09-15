@@ -12,6 +12,8 @@ app.controller("MyProfileCtrl", function($scope, $location, ProfileFactory) {
     userId: $scope.$parent.getUser()
   }
 
+  ProfileFactory.getProfile($scope.newUserProfile.userId)
+
   $scope.editProfile = () => {
     console.log("edit profile button clicked")
     ProfileFactory.patchProfile($scope.newUserProfile)
