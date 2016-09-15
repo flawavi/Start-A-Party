@@ -1,17 +1,19 @@
 "use strict"
 
-app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location){
+app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location, AuthFactory){
 
-    let getProfile = (userId) => {
+    let getProfiles = (userId) => {
+      console.log(userId)
+      let profiles = []
     return $q((resolve, reject) => {
       console.log(userId);
-      $http.get(`${FirebaseURL}profiles.json`)
+      $http.get(`${FirebaseURL}profiles.json?orderBy="uid"`)
       .success((profileObj)=>{
-        console.log(profileObj, "profileObj");
+        console.log(profileObj, "profileObj")
         if (profileObj !== null){
           resolve(profileObj)
         } else {
-          console.log(profileObj, "profile");
+          console.log(profileObj, "profile")
           resolve(profileObj)
         }
       })
@@ -21,7 +23,10 @@ app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location){
     })
   }
 
+
   let postProfile = (newProfile) => {
+    newProfile.uid = AuthFactory.getUser().uid;
+    console.log("newProfile", newProfile)
     return $q((resolve, reject) => {
       $http.post(`${FirebaseURL}/profiles.json`,
       JSON.stringify(newProfile))
@@ -60,7 +65,8 @@ app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location){
   return {
     postProfile,
     deleteProfile,
-    patchProfile
+    patchProfile,
+    getProfiles
   }
 
 })

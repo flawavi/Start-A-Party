@@ -3,11 +3,10 @@
 app.factory("AuthFactory", function() {
 
   let service,
-      initialized = false
-
+      initialized = false,
+      loggedInUser = null
 
   let createUser = userObj => {
-    console.log(userObj, "userObj")
     return firebase.auth().createUserWithEmailAndPassword(userObj.email, userObj.password)
   }
 
@@ -19,24 +18,29 @@ app.factory("AuthFactory", function() {
     return firebase.auth().signOut()
   }
 
+  let getUser = () => {
+    return loggedInUser;
+  }
+
   let currentUser = () => {
     return new Promise ((resolve, reject) => {
-      if (initialized) return resolve(firebase.auth().currentUser)
-        console.log("current user jibjab")
-      let unsubscribe = firebase.auth().onAuthStateChanged(user => {
-        unsubscribe()
+      firebase.auth().onAuthStateChanged(user => {
+        console.log("onAuthStateChanged resolves with ", user)
+        loggedInUser = user;
         resolve(user)
       }, error => {
-        initialized = true
-        unsubscribe()
         reject(error)
       })
     })
   }
 
-  let isAuthenticated = () => currentUser.then(user => !!user)
 
-  service = {currentUser, createUser, loginUser, logoutUser, isAuthenticated}
+
+  let isAuthenticated = () => {
+    return (firebase.auth().currentUser) ? true : false;
+  };
+
+  service = {currentUser, createUser, loginUser, logoutUser, isAuthenticated, getUser}
 
   return service
 

@@ -9,7 +9,8 @@ app.controller("ProfileCtrl", function($scope, ProfileFactory, $location, curren
     name: "",
     userName: "",
     city: "",
-    age: ""
+    age: "",
+    userID: null
   }
 
   $scope.createProfile = () => {
@@ -28,6 +29,10 @@ app.controller("ProfileCtrl", function($scope, ProfileFactory, $location, curren
       console.log($scope.newUserProfile, "edited profile")
       $location.url("profile")
     })
+  }
+
+  $scope.getProfileFromFirebase = () => {
+    console.log('TESTING', ProfileFactory.getProfile());
   }
 
 })

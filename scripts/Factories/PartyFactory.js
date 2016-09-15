@@ -30,7 +30,6 @@ app.factory("PartyFactory", function($q, $http, FirebaseURL, $location){
     })
   }
 
-
   let deleteParty = (partyId) => {
     return $q((resolve, reject) => {
       $http.delete(`${FirebaseURL}parties/${partyId}.json`)
