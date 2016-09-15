@@ -1,30 +1,33 @@
 "use strict"
 
 app.controller("NavCtrl", function($scope, $location, AuthFactory, $window){
+  $scope.isLoggedIn = false;
+
+  $scope.logout = () => {
+    console.log("LOGMEOUT")
+    AuthFactory.logoutUser().then(() => {
+      $scope.isLoggedIn = false;
+      $location.url("/login")
+    });
+  }
+
+  AuthFactory.currentUser().then(() => {
+    $scope.isLoggedIn = true;
+  });
 
   $scope.navItems = [
       {
         name: "Logout",
-        url: "#/logout",
-        showState: "$parent.isLoggedIn"
+        url: "#/logout"
       },
-
-      {
-        name: "Login",
-        url: "#/login",
-        showState: "!$parent.isLoggedOut"
-      },
-
       {
         name: "Start A Party",
-        url: "#/party-form",
-        showState: "$parent.isLoggedIn"
+        url: "#/party-form"
       },
 
       {
         name: "Your Profile",
-        url: "#/userprofile",
-        showState: "$parent.isLoggedIn"
+        url: "#/userprofile"
       }
   ]
 
@@ -42,5 +45,7 @@ app.controller("NavCtrl", function($scope, $location, AuthFactory, $window){
   }
 
   $scope.isActive = viewLocation => viewLocation === $location.path();
+
+
 
 });
