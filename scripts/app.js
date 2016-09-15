@@ -34,11 +34,6 @@ app.config(function($routeProvider){
       requireCurrentUser
     }
   })
-  .when("/pressthebutton", {
-    templateUrl: "partials/pressthebutton.html",
-    controller: "PressTheButtonCtrl",
-    requireAuth: true
-  })
   .when("/geolocate", {
     templateUrl: "partials/geolocate.html",
     controller: "GeoLocateCtrl",
@@ -74,6 +69,7 @@ app.run(($location, FBCreds) => {
   firebase.initializeApp(authConfig)
 })
 
+//sentinel
 app.run(function($rootScope, $location) {
   $rootScope.$on("$routeChangeError", (evt, curr, prev, err) => {
     if (!err || err.message !== 'NO_CURRENT_USER') return

@@ -1,6 +1,6 @@
 "use strict"
 
-app.controller("NavCtrl", function($scope, $location){
+app.controller("NavCtrl", function($scope, $location, AuthFactory, $window){
 
   $scope.navItems = [
       {
@@ -28,6 +28,19 @@ app.controller("NavCtrl", function($scope, $location){
       }
   ]
 
-  $scope.isActive = (viewLocation) => viewLocation === $location.path();
+  $scope.logout = () => {
+    console.log("you logged out")
+    AuthFactory.logoutUser()
+    .then(data => {
+      if(data) {
+        $window.location.href = "#/profile"
+      } else {
+        $window.location.href = "#/login"
+      }
+      console.log("data", data)
+    })
+  }
+
+  $scope.isActive = viewLocation => viewLocation === $location.path();
 
 });
