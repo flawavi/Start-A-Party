@@ -22,6 +22,7 @@ app.factory("AuthFactory", function() {
   let currentUser = () => {
     return new Promise ((resolve, reject) => {
       if (initialized) return resolve(firebase.auth().currentUser)
+        console.log("current user jibjab")
       let unsubscribe = firebase.auth().onAuthStateChanged(user => {
         unsubscribe()
         resolve(user)
