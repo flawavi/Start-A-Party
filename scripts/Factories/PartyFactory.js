@@ -1,8 +1,9 @@
 "use strict"
 
-app.factory("PartyFactory", function($q, $http, FirebaseURL, $location){
+app.factory("PartyFactory", function($q, $http, FirebaseURL, $location, AuthFactory){
 
   let postParty = (newParty) => {
+    newParty.partyID = AuthFactory.getUser().uid
     return $q((resolve, reject) => {
       $http.post(`${FirebaseURL}/parties.json`,
       JSON.stringify(newParty))
@@ -29,7 +30,6 @@ app.factory("PartyFactory", function($q, $http, FirebaseURL, $location){
       })
     })
   }
-
 
   let deleteParty = (partyId) => {
     return $q((resolve, reject) => {

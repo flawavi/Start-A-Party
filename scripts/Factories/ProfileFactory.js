@@ -1,27 +1,10 @@
 "use strict"
 
-app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location){
-
-    let getProfile = (userId) => {
-    return $q((resolve, reject) => {
-      console.log(userId);
-      $http.get(`${FirebaseURL}profiles.json`)
-      .success((profileObj)=>{
-        console.log(profileObj, "profileObj");
-        if (profileObj !== null){
-          resolve(profileObj)
-        } else {
-          console.log(profileObj, "profile");
-          resolve(profileObj)
-        }
-      })
-      .error((error) => {
-        reject(error);
-      })//.success does parsing for us
-    })
-  }
+app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location, AuthFactory){
 
   let postProfile = (newProfile) => {
+    newProfile.uid = AuthFactory.getUser().uid
+    console.log("newProfile", newProfile)
     return $q((resolve, reject) => {
       $http.post(`${FirebaseURL}/profiles.json`,
       JSON.stringify(newProfile))
@@ -34,6 +17,29 @@ app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location){
       })
     })
   }
+
+    let getProfiles = (userId) => {
+      console.log(userId)
+      let profiles = []
+    return $q((resolve, reject) => {
+      console.log(userId);
+      $http.get(`${FirebaseURL}profiles.json?orderBy="uid"`)
+      .success((profileObj)=>{
+        console.log(profileObj, "profileObj")
+        if (profileObj !== null){
+          resolve(profileObj)
+        } else {
+          console.log(profileObj, "profile")
+          resolve(profileObj)
+        }
+      })
+      .error((error) => {
+        reject(error);
+      })//.success does parsing for us
+    })
+  }
+
+
 
   let patchProfile = (profileId, updatedProfile) => {
     return $q((resolve, reject) => {
@@ -60,7 +66,8 @@ app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location){
   return {
     postProfile,
     deleteProfile,
-    patchProfile
+    patchProfile,
+    getProfiles
   }
 
 })

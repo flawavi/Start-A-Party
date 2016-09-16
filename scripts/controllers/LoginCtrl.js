@@ -25,7 +25,10 @@ app.controller("LoginCtrl", function($scope, $window, AuthFactory){
 
   $scope.login = () => {
     console.log("you logged in")
-    AuthFactory.loginUser()
+    AuthFactory.loginUser({
+      email: $scope.account.email,
+      password: $scope.account.password
+    })
     .then((data) => {
       if(data) {
         $window.location.href = "#/profile"

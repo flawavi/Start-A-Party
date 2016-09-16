@@ -1,18 +1,17 @@
 "use strict"
 
-app.controller("MyProfileCtrl", function($scope, $location, ProfileFactory) {
+app.controller("MyProfileCtrl", function($scope, $location, ProfileFactory, AuthFactory) {
 
   $scope.title = "My Profile"
+  console.log('TESTING', ProfileFactory.getProfiles());
 
     $scope.newUserProfile = {
     name: "",
     userName: "",
     city: "",
     age: "",
-    userId: $scope.$parent.getUser()
+    userID: null
   }
-
-  ProfileFactory.getProfile($scope.newUserProfile.userId)
 
   $scope.editProfile = () => {
     console.log("edit profile button clicked")
@@ -22,6 +21,5 @@ app.controller("MyProfileCtrl", function($scope, $location, ProfileFactory) {
       $location.url("profile")
     })
   }
-
 
 })

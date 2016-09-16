@@ -1,12 +1,14 @@
 "use strict"
 
 app.controller("GeoLocateCtrl", function($scope, $log, $timeout, $location){
-  $scope.myProfile = ()=>{
+
+  $scope.goToMyProfile = () => {
     $location.url("/my-profile")
   }
+
   $scope.message = "hello"
 
-  $scope.map = { center: { latitude: 11.8251, longitude: 42.5903 }, zoom: 8}
+  $scope.map = { center: { latitude: 43.14246967921588, longitude: -102.6595885925293 }, zoom: 8}
 
   $scope.options = {scrollwheel: false};
 
@@ -15,8 +17,8 @@ app.controller("GeoLocateCtrl", function($scope, $log, $timeout, $location){
   $scope.marker = {
     id: 0,
     coords: {
-      latitude: 40.1451,
-      longitude: -99.6680
+      latitude: 43.14246967921588,
+      longitude: -102.6595885925293
     },
 
     options: {draggable: true},
