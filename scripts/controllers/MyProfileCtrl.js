@@ -3,7 +3,6 @@
 app.controller("MyProfileCtrl", function($scope, $location, $routeParams, ProfileFactory, AuthFactory) {
 
   $scope.title = "My Profile"
-  console.log('TESTING', ProfileFactory.getProfiles())
 
     $scope.newUserProfile = {
     name: "",
@@ -12,10 +11,13 @@ app.controller("MyProfileCtrl", function($scope, $location, $routeParams, Profil
     age: ""
   }
 
- ProfileFactory.getProfileById(AuthFactory.currentUser().userId)
+$scope.profileID = AuthFactory.getUser().uid
+ProfileFactory.getProfileById($scope.profileID)
   .then(response => {
-    console.log(response, "response")
-    $scope.newUserProfile = response;
+    for (var key in response) {
+      console.log(response[key], "responseKey")
+      $scope.newUserProfile = response[key];
+    }
   });
 
 

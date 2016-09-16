@@ -4,7 +4,7 @@ app.factory("AuthFactory", function() {
 
   let service,
       initialized = false,
-      userId = null
+      loggedInUser = null
 
   let createUser = userObj => {
     return firebase.auth().createUserWithEmailAndPassword(userObj.email, userObj.password)
@@ -19,14 +19,14 @@ app.factory("AuthFactory", function() {
   }
 
   let getUser = () => {
-    return userId;
+    return loggedInUser;
   }
 
   let currentUser = () => {
     return new Promise ((resolve, reject) => {
       firebase.auth().onAuthStateChanged(user => {
         console.log("onAuthStateChanged resolves with ", user)
-        userId = user;
+        loggedInUser = user;
         resolve(user)
       }, error => {
         reject(error)
