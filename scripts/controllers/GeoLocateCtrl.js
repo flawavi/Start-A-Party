@@ -13,7 +13,7 @@ app.controller("GeoLocateCtrl", function($scope, $log, $timeout, $location, Auth
 
   $scope.message = "hello"
 
-  $scope.map = { center: { latitude: -17.7134, longitude: 178.0650 }, zoom: 8}
+  $scope.map = { center: { latitude: 11.8251, longitude: 42.5903 }, zoom: 8}
 
   $scope.options = {scrollwheel: false};
 
@@ -22,8 +22,8 @@ app.controller("GeoLocateCtrl", function($scope, $log, $timeout, $location, Auth
   $scope.marker = {
     id: 0,
     coords: {
-      latitude: -17.7134,
-      longitude: 178.0650
+      latitude: 11.8251,
+      longitude: 42.5903
     },
 
     options: {draggable: true},
