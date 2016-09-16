@@ -37,17 +37,34 @@ app.config(function($routeProvider){
   .when("/geolocate", {
     templateUrl: "partials/geolocate.html",
     controller: "GeoLocateCtrl",
-    requireAuth: true
+    resolve: {
+      currentUser,
+      requireCurrentUser
+    }
   })
   .when("/party-form", {
     templateUrl: "partials/party-form.html",
     controller: "StartAPartyCtrl",
-    requireAuth: true
+    resolve: {
+      currentUser,
+      requireCurrentUser
+    }
   })
   .when("/my-profile", {
     templateUrl: "partials/my-profile.html",
     controller: "MyProfileCtrl",
-    requireAuth: true
+    resolve: {
+      currentUser,
+      requireCurrentUser
+    }
+  })
+  .when("/invite", {
+    templateUrl: "partials/invitation.html",
+    controller: "InvitationCtrl"
+    // resolve: {
+    //   currentUser,
+    //   requireCurrentUser
+    // }
   })
   .otherwise("/")
 })
