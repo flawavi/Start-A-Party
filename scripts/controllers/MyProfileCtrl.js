@@ -12,18 +12,20 @@ app.controller("MyProfileCtrl", function($scope, $location, $routeParams, Profil
     age: ""
   }
 
+ ProfileFactory.getProfileById($routeParams.profileId)
+  .then(response => {
+ console.log($routeParams.profileId)
+    $scope.newUserProfile = response;
+  });
+
   $scope.editProfile = () => {
     console.log("edit profile button clicked")
     ProfileFactory.patchProfile($scope.newUserProfile)
     .then(() => {
-      console.log($scope.newUserProfile, "edited profile")
+      console.log($scope.newUserProfile, "newUserProfile")
       $location.url("profile")
     })
   }
 
- ProfileFactory.getProfileById($routeParams.profileId)
-  .then(response => {
-    $scope.newUserProfile = response;
-  });
 
 })

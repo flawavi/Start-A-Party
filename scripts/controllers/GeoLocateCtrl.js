@@ -7,6 +7,10 @@ app.controller("GeoLocateCtrl", function($scope, $log, $timeout, $location, Auth
     $location.url("/my-profile/${$scope.profileId}")
   }
 
+  $scope.invite = () => {
+    $location.url("/invite")
+  }
+
   $scope.profileId = AuthFactory.getUser()
   $scope.message = "hello"
 
