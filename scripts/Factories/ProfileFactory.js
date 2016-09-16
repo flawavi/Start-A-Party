@@ -66,6 +66,7 @@ app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location, AuthFa
   }
 
   let getProfileById = (profileId) => {
+    console.log(profileId, "profileId")
     return $q((resolve, reject) => {
       $http.get(`${FirebaseURL}profiles/${profileId}.json`)
       .success((profileObjFromFirebase) => {

@@ -1,11 +1,13 @@
 "use strict"
 
-app.controller("GeoLocateCtrl", function($scope, $log, $timeout, $location){
+app.controller("GeoLocateCtrl", function($scope, $log, $timeout, $location, AuthFactory){
 
   $scope.goToMyProfile = () => {
-    $location.url("/my-profile")
+    console.log($scope.profileId)
+    $location.url("/my-profile/${$scope.profileId}")
   }
 
+  $scope.profileId = AuthFactory.getUser()
   $scope.message = "hello"
 
   $scope.map = { center: { latitude: -17.7134, longitude: 178.0650 }, zoom: 8}
@@ -17,8 +19,8 @@ app.controller("GeoLocateCtrl", function($scope, $log, $timeout, $location){
   $scope.marker = {
     id: 0,
     coords: {
-      latitude: 43.14246967921588,
-      longitude: -102.6595885925293
+      latitude: -17.7134,
+      longitude: 178.0650
     },
 
     options: {draggable: true},

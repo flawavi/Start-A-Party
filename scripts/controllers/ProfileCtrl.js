@@ -21,15 +21,6 @@ app.controller("ProfileCtrl", function($scope, ProfileFactory, $location, curren
     })
   }
 
-  $scope.editProfile = () => {
-    console.log("edit profile button clicked")
-    ProfileFactory.patchProfile($scope.newUserProfile)
-    .then(() => {
-      console.log($scope.newUserProfile, "edited profile")
-      $location.url("profile")
-    })
-  }
-
   $scope.getProfileFromFirebase = () => {
     console.log('TESTING', ProfileFactory.getProfile())
   }

@@ -21,7 +21,7 @@ app.controller("MyProfileCtrl", function($scope, $location, $routeParams, Profil
     })
   }
 
- ProfileFactory.getProfileById($routeParams.uid)
+ ProfileFactory.getProfileById($routeParams.profileId)
   .then(response => {
     $scope.newUserProfile = response;
   });
