@@ -21,8 +21,4 @@ app.controller("ProfileCtrl", function($scope, ProfileFactory, $location, curren
     })
   }
 
-  $scope.getProfileFromFirebase = () => {
-    console.log('TESTING', ProfileFactory.getProfile())
-  }
-
 })
