@@ -4,7 +4,7 @@ app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location, AuthFa
 
   let postProfile = (newProfile) => {
     newProfile.uid = AuthFactory.getUser().uid
-    console.log("newProfile", newProfile)
+    console.log("newProfile", newProfile.uid)
     return $q((resolve, reject) => {
       $http.post(`${FirebaseURL}/profiles.json`,
       JSON.stringify(newProfile))
@@ -19,13 +19,11 @@ app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location, AuthFa
   }
 
     let getProfiles = (userId) => {
-      console.log(userId)
       let profiles = []
     return $q((resolve, reject) => {
-      console.log(userId);
-      $http.get(`${FirebaseURL}profiles.json?orderBy="uid"`)
+      $http.get(`${FirebaseURL}profiles.json`)
       .success((profileObj)=>{
-        console.log(profileObj, "profileObj")
+        // console.log(profileObj, "profileObj")
         if (profileObj !== null){
           resolve(profileObj)
         } else {
@@ -68,7 +66,7 @@ app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location, AuthFa
   let getProfileById = (profileId) => {
     console.log(profileId, "profileId")
     return $q((resolve, reject) => {
-      $http.get(`${FirebaseURL}profiles/${profileId}.json`)
+      $http.get(`${FirebaseURL}profiles.json?orderBy="uid"&equalTo="${profileId}"`)
       .success((profileObjFromFirebase) => {
         resolve(profileObjFromFirebase)
       })
