@@ -14,9 +14,10 @@ app.controller("MyProfileCtrl", function($scope, $location, $routeParams, Profil
 
  ProfileFactory.getProfileById($routeParams.profileId)
   .then(response => {
- console.log($routeParams.profileId)
+  console.log($routeParams.profileId)
     $scope.newUserProfile = response;
   });
+
 
   $scope.editProfile = () => {
     console.log("edit profile button clicked")
