@@ -55,6 +55,8 @@ app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location, AuthFa
   }
 
   let deleteProfile = (profileId) => {
+    profileId.uid = AuthFactory.getUser().uid
+    profileId = profileId.uid
     return $q((resolve) => {
       $http.delete(`${FirebaseURL}profiles/${profileId}.json`)
       .success((profileObjFromFirebase) => {
@@ -63,11 +65,25 @@ app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location, AuthFa
     })
   }
 
+  let getProfileById = (profileId) => {
+    return $q((resolve, reject) => {
+      $http.get(`${FirebaseURL}profiles/${profileId}.json`)
+      .success((profileObjFromFirebase) => {
+        resolve(profileObjFromFirebase)
+      })
+      .error(error => {
+        reject(error)
+      })
+    })
+  }
+
+
   return {
     postProfile,
     deleteProfile,
     patchProfile,
-    getProfiles
+    getProfiles,
+    getProfileById
   }
 
 })

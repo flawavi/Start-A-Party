@@ -58,6 +58,11 @@ app.config(function($routeProvider){
       requireCurrentUser
     }
   })
+  .when("/my-profile/:profileId", {
+    templateUrl: "partials/my-profile.html",
+    controller: "MyProfileCtrl",
+
+  })
   .when("/invite", {
     templateUrl: "partials/invitation.html",
     controller: "InvitationCtrl"

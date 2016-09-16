@@ -8,7 +8,7 @@ app.controller("GeoLocateCtrl", function($scope, $log, $timeout, $location){
 
   $scope.message = "hello"
 
-  $scope.map = { center: { latitude: 43.14246967921588, longitude: -102.6595885925293 }, zoom: 8}
+  $scope.map = { center: { latitude: -17.7134, longitude: 178.0650 }, zoom: 8}
 
   $scope.options = {scrollwheel: false};
 

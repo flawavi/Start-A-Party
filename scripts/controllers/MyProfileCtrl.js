@@ -1,6 +1,6 @@
 "use strict"
 
-app.controller("MyProfileCtrl", function($scope, $location, ProfileFactory, AuthFactory) {
+app.controller("MyProfileCtrl", function($scope, $location, $routeParams, ProfileFactory, AuthFactory) {
 
   $scope.title = "My Profile"
   console.log('TESTING', ProfileFactory.getProfiles());
@@ -9,8 +9,7 @@ app.controller("MyProfileCtrl", function($scope, $location, ProfileFactory, Auth
     name: "",
     userName: "",
     city: "",
-    age: "",
-    userID: null
+    age: ""
   }
 
   $scope.editProfile = () => {
@@ -21,5 +20,10 @@ app.controller("MyProfileCtrl", function($scope, $location, ProfileFactory, Auth
       $location.url("profile")
     })
   }
+
+ ProfileFactory.getProfileById($routeParams.uid)
+  .then(response => {
+    $scope.newUserProfile = response;
+  });
 
 })

@@ -32,10 +32,23 @@ app.factory("PartyFactory", function($q, $http, FirebaseURL, $location, AuthFact
   }
 
   let deleteParty = (partyId) => {
+    partyId.uid = AuthFactory.getUser().uid
+    partyId = partyId.uid
     return $q((resolve, reject) => {
       $http.delete(`${FirebaseURL}parties/${partyId}.json`)
       .success((partyObjFromFirebase) => {
         resolve(partyObjFromFirebase)
+      })
+    })
+  }
+
+    let getProfileById = (partyId) => {
+    partyId.uid = AuthFactory.getUser().uid
+    partyId = partyId.uid
+    return $q((resolve) => {
+      $http.get(`${FirebaseURL}profiles/${partyId}.json`)
+      .success((profileObjFromFirebase) => {
+        resolve(profileObjFromFirebase)
       })
     })
   }
