@@ -2,16 +2,15 @@
 
 app.controller("GeoLocateCtrl", function($scope, $log, $timeout, $location, AuthFactory){
 
-  $scope.goToMyProfile = () => {
-    console.log($scope.profileId)
-    $location.url("/my-profile/${$scope.profileId}")
+  $scope.goToMyProfile = (profileId) => {
+    profileId = AuthFactory.getUser().uid
+    $location.url(`/my-profile/${profileId}`)
   }
 
   $scope.invite = () => {
     $location.url("/invite")
   }
 
-  $scope.profileId = AuthFactory.getUser()
   $scope.message = "hello"
 
   $scope.map = { center: { latitude: -17.7134, longitude: 178.0650 }, zoom: 8}
