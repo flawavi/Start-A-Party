@@ -41,7 +41,7 @@ app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location, AuthFa
 
   let patchProfile = (profileId, updatedProfile) => {
     return $q((resolve, reject) => {
-      $http.patch(`${FirebaseURL}/profiles.${profileId}.json`,
+      $http.patch(`${FirebaseURL}profiles.${profileId}.json`,
       JSON.stringify(updatedProfile))
       .success((profileObjFromFirebase) => {
         $location.path("/home")
@@ -76,13 +76,28 @@ app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location, AuthFa
     })
   }
 
+  let getProfileByUserName = (userName) => {
+    console.log(userName, "userName")
+    return $q((resolve, reject) => {
+      $http.get(`${FirebaseURL}profiles.json?orderBy="userName"&equalTo="${userName}"`)
+      .success((profileObjFromFirebase) => {
+        console.log(profileObjFromFirebase, "profile from firebase")
+        resolve(profileObjFromFirebase)
+      })
+      .error(error => {
+        reject(error)
+      })
+    })
+  }
+
 
   return {
     postProfile,
     deleteProfile,
     patchProfile,
     getProfiles,
-    getProfileById
+    getProfileById,
+    getProfileByUserName
   }
 
 })
