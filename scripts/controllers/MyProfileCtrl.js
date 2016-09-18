@@ -11,8 +11,8 @@ app.controller("MyProfileCtrl", function($scope, $location, $routeParams, Profil
     age: ""
   }
 
-  console.log(AuthFactory.getUser().uid)
   $scope.profileID = AuthFactory.getUser().uid
+
   ProfileFactory.getProfileById($scope.profileID)
     .then(response => {
       for (var key in response) {
