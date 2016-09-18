@@ -6,7 +6,7 @@
     </ui-gmap-google-map>
     <button class="btn btn-success" ng-click="initMap()">Start A Party</button>
     <button class="btn btn-info" ng-click="goToMyProfile()">My Profile</button>
-    <button class="btn btn-warning" ng-click="invite()">Create Invitations</button>
+    <button class="btn btn-warning" ng-click="invite()" ng-disabled="!geolocated">Create Invitations</button>
     <div ng-cloak>
         <ul>
             <li>coords update ctr: {{coordsUpdates}}</li>

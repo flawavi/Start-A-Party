@@ -1,6 +1,6 @@
 "use strict"
 
-app.controller("MyProfileCtrl", function($scope, $location, $routeParams, ProfileFactory, AuthFactory) {
+app.controller("MyProfileCtrl", function($scope, $location, ProfileFactory, AuthFactory) {
 
   $scope.title = "My Profile"
 
