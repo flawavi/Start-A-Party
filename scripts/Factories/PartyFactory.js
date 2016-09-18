@@ -1,11 +1,11 @@
 "use strict"
 
-app.factory("PartyFactory", function($q, $http, FirebaseURL, $location, AuthFactory){
+app.factory("PartyFactory", function($q, $http, FirebaseURL, AuthFactory){
 
   let postParty = (newParty) => {
-    newParty.partyID = AuthFactory.getUser().uid
+    newParty.ownerID = AuthFactory.getUser().uid
     return $q((resolve, reject) => {
-      $http.post(`${FirebaseURL}/parties.json`,
+      $http.post(`${FirebaseURL}parties.json`,
       JSON.stringify(newParty))
       .success((partyObjFromFirebase) => {
         console.log(partyObjFromFirebase, "new Party")
@@ -19,11 +19,11 @@ app.factory("PartyFactory", function($q, $http, FirebaseURL, $location, AuthFact
 
   let patchParty = (partyId, updatedParty) => {
     return $q((resolve, reject) => {
-      $http.patch(`${FirebaseURL}/parties.${partyId}.json`,
+      $http.patch(`${FirebaseURL}parties/${partyId}.json`,
       JSON.stringify(updatedParty))
-      console.log(updatedParty, "updated Party")
       .success((partyObjFromFirebase) => {
-        $location.path("/home")
+        console.log(updatedParty, "updated Party")
+        resolve(partyObjFromFirebase)
       })
       .error((error) => {
         reject(error)
@@ -42,13 +42,14 @@ app.factory("PartyFactory", function($q, $http, FirebaseURL, $location, AuthFact
     })
   }
 
-    let getProfileById = (partyId) => {
-    partyId.uid = AuthFactory.getUser().uid
-    partyId = partyId.uid
-    return $q((resolve) => {
-      $http.get(`${FirebaseURL}profiles/${partyId}.json`)
-      .success((profileObjFromFirebase) => {
-        resolve(profileObjFromFirebase)
+    let getPartyById = (partyId) => {
+    return $q((resolve, reject) => {
+      $http.get(`${FirebaseURL}parties/${partyId}.json`)
+      .success((partyObjFromFirebase) => {
+        resolve(partyObjFromFirebase)
+      })
+      .error((error) => {
+        reject(error)
       })
     })
   }
@@ -56,7 +57,8 @@ app.factory("PartyFactory", function($q, $http, FirebaseURL, $location, AuthFact
   return {
     postParty,
     patchParty,
-    deleteParty
+    deleteParty,
+    getPartyById
   }
 
 })

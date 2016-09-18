@@ -1,8 +1,17 @@
 "use strict"
 
-app.controller("InvitationCtrl", function($scope, AuthFactory, PartyFactory, ProfileFactory, SearchProfiles) {
+app.controller("InvitationCtrl", function(
+  $scope,
+  AuthFactory,
+  PartyFactory,
+  ProfileFactory,
+  SearchProfiles,
+  currentParty
+  )
+{
   // $scope.searchText = SearchProfiles;
 
+  console.log(currentParty)
   $scope.message = "Who gon' be @ dis pardee??"
 
   $scope.invitation = {

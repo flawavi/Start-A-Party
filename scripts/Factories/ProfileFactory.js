@@ -4,7 +4,6 @@ app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location, AuthFa
 
   let postProfile = (newProfile) => {
     newProfile.uid = AuthFactory.getUser().uid
-    newProfile.rsvp = "going"
     console.log("newProfile", newProfile.uid)
     return $q((resolve, reject) => {
       $http.post(`${FirebaseURL}/profiles.json`,

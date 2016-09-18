@@ -13,6 +13,10 @@ const redirectCurrentUser = AuthFactory => AuthFactory.currentUser().then(user =
   if (user) throw new Error('CURRENT_USER')
 })
 
+const currentParty = ($route, PartyFactory) => {
+  return PartyFactory.getPartyById($route.current.params.id)
+}
+
 app.config(function($routeProvider){
   $routeProvider
   .when("/", {
@@ -34,12 +38,13 @@ app.config(function($routeProvider){
       requireCurrentUser
     }
   })
-  .when("/geolocate", {
+  .when("/geolocate/:id", {
     templateUrl: "partials/geolocate.html",
     controller: "GeoLocateCtrl",
     resolve: {
       currentUser,
-      requireCurrentUser
+      requireCurrentUser,
+      currentParty
     }
   })
   .when("/party-form", {
@@ -61,14 +66,14 @@ app.config(function($routeProvider){
   .when("/my-profile/:profileId", {
     templateUrl: "partials/my-profile.html",
     controller: "MyProfileCtrl",
-
   })
-  .when("/invite", {
+  .when("/invite/:id", {
     templateUrl: "partials/invitation.html",
     controller: "InvitationCtrl",
     resolve: {
       currentUser,
-      requireCurrentUser
+      requireCurrentUser,
+      currentParty
     }
   })
   .otherwise("/")

@@ -1,14 +1,36 @@
 "use strict"
 
-app.controller("GeoLocateCtrl", function($scope, $log, $timeout, $location, AuthFactory){
+app.controller("GeoLocateCtrl", function(
+  $log,
+  $scope,
+  $timeout,
+  $location,
+  AuthFactory,
+  currentParty,
+  $routeParams,
+  PartyFactory
+  )
+{
+
+  console.log(currentParty, "CURRENT PARTY")
+
+  let lat = 11.8251
+  let long = 42.5903
+
+  $scope.geolocated = false
 
   $scope.goToMyProfile = (profileId) => {
     profileId = AuthFactory.getUser().uid
     $location.url(`/my-profile/${profileId}`)
   }
 
+
+
   $scope.invite = () => {
-    $location.url("/invite")
+    PartyFactory.patchParty($routeParams.id, {lat, long})
+    .then(() => {
+      $location.url(`/invite/${$routeParams.id}`)
+    })
   }
 
   $scope.message = "hello"
@@ -87,6 +109,9 @@ app.controller("GeoLocateCtrl", function($scope, $log, $timeout, $location, Auth
           };
         console.log(position, "position")
         $scope.map = pos
+        lat = pos.center.latitude
+        long = pos.center.longitude
+        $scope.geolocated = true
 
         $scope.$apply()
         // checks for changes, runs angular digest process
@@ -95,19 +120,19 @@ app.controller("GeoLocateCtrl", function($scope, $log, $timeout, $location, Auth
         // map.setCenter(pos);
       },
       function() {
-        handleLocationError(true, infoWindow, map.getCenter());
+        // handleLocationError(true, infoWindow, map.getCenter());
       });
     } else {
         // Browser doesn't support Geolocation
-        handleLocationError(false, infoWindow, map.getCenter());
+        // handleLocationError(false, infoWindow, map.getCenter());
       }
   }
 
-  function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-    infoWindow.setPosition(pos);
-    infoWindow.setContent(browserHasGeolocation ?
-                          'Error: The Geolocation service failed.' :
-                          'Error: Your browser doesn\'t support geolocation.');
-  }
+  // function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+  //   infoWindow.setPosition(pos);
+  //   infoWindow.setContent(browserHasGeolocation ?
+  //                         'Error: The Geolocation service failed.' :
+  //                         'Error: Your browser doesn\'t support geolocation.');
+  // }
 
 })
