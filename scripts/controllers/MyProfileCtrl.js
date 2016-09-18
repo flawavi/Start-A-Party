@@ -11,15 +11,27 @@ app.controller("MyProfileCtrl", function($scope, $location, $routeParams, Profil
     age: ""
   }
 
-$scope.profileID = AuthFactory.getUser().uid
-ProfileFactory.getProfileById($scope.profileID)
-  .then(response => {
-    for (var key in response) {
-      console.log(response[key], "responseKey")
-      $scope.newUserProfile = response[key];
-    }
-  });
+  console.log(AuthFactory.getUser().uid)
+  $scope.profileID = AuthFactory.getUser().uid
+  ProfileFactory.getProfileById($scope.profileID)
+    .then(response => {
+      for (var key in response) {
+        console.log(response[key], "responseKey")
+        $scope.newUserProfile = response[key];
+      }
+    });
 
+  $scope.deleteProfile = () => {
+    console.log("delete button clicked")
+    ProfileFactory.deleteProfile($scope.profileID)
+    ProfileFactory.getProfileById($scope.profileID)
+    .then(response => {
+      for (var key in response) {
+        console.log(response[key], "responseKey")
+        $scope.newUserProfile = response[key];
+      }
+    });
+  }
 
   $scope.editProfile = () => {
     console.log("edit profile button clicked")
