@@ -65,11 +65,11 @@ app.config(function($routeProvider){
   })
   .when("/invite", {
     templateUrl: "partials/invitation.html",
-    controller: "InvitationCtrl"
-    // resolve: {
-    //   currentUser,
-    //   requireCurrentUser
-    // }
+    controller: "InvitationCtrl",
+    resolve: {
+      currentUser,
+      requireCurrentUser
+    }
   })
   .otherwise("/")
 })

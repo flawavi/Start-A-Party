@@ -3,14 +3,18 @@
 <form>
   <div class="form-group">
     <label>Invite some people to your party</label>
-    <input type="text" class="form-control" placeholder="guest names" ng-model="invitation.guests"/>
+    <input type="text" class="form-control" placeholder="search by username" ng-model="userName"/>
   </div>
 
   <div class="form-group">
-    <p></p>
+    <p>{{invitation.name}}</p>
+    <p>{{invitation.userName}}</p>
+    <p>{{invitation.age}}</p>
+    <p>{{invitation.city}}</p>
   </div>
 
-  <button type="" class="btn btn-success" ng-click="invite()">Send Invites</button>
-  <button type="" class="btn btn-success" ng-click="invite()">Add Guest</button>
+  <!-- <button type="" class="btn btn-success" ng-click="invite()">Send Invites</button> -->
+  <!-- <button type="" class="btn btn-success" ng-click="invite()">Add Guest</button> -->
+  <button type="" class="btn btn-success" ng-click="findUser()">Show Results</button>
 
 </form>
