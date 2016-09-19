@@ -11,7 +11,7 @@ app.controller("PartyCtrl", function(
   )
 {
 
-  $scope.title = "This time let's party for real this time"
+  $scope.title = "This time, let's party for real this time"
   $scope.party = currentParty
   $scope.partyID = $routeParams.id
   $scope.owner = AuthFactory.getUser().uid === currentParty.ownerID
