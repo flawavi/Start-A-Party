@@ -1,24 +1,23 @@
-<h1>{{title}}</h1>
-<div class="profileForm">
-  <div class="profileInfo">
-    <h4>Name: </h4>
-    <span>{{profile.name}}</span>
-    <h4>Username: </h4>
-    <span>{{profile.userName}}</span>
-    <h4>City: </h4>
-    <span>{{profile.city}}</span>
-    <h4>Age: </h4>
-    <span>Age: {{profile.age}}</span>
-  </div>
-</div>
+<div>
+  <h1 class="myProfile"><--{{title}} ¯\_(ツ)_/¯ {{parties}}--></h1>
 <br>
+  <div class="profileForm">
+    <h4>Name </h4>
+    <span>{{profile.name}}</span>
+    <h4>Username </h4>
+    <span>{{profile.userName}}</span>
+    <h4>City </h4>
+    <span>{{profile.city}}</span>
+    <h4>Age </h4>
+    <span>{{profile.age}} years old</span>
+  </div>
+  <br>
   <div class="otherInfo">
     <div>
       <h4>Invited: {{invitedCount}}</h4>
       <ul ng-repeat="party in profile.invited">
         <li><a ng-href="/#/party/{{party.partyId}}">{{party.partyName}}</a></li>
       </ul>
-
     </div>
     <div>
       <div>
@@ -27,7 +26,6 @@
           <ul ng-repeat="party in profile.attending">
             <li><a ng-href="/#/party/{{party.partyId}}">{{party.partyName}}</a></li>
           </ul>
-
       </div>
       <div>
         <h5>Declined: {{declinedCount}}</h5>
@@ -43,5 +41,5 @@
       </div>
     </div>
   </div>
-
-  <button class="party-btn btn btn-success" ng-click="goToPartyForm()">Start A Party</button>
+    <button class="party-btn btn btn-success" ng-click="goToPartyForm()">Start A party</button>
+</div>

@@ -16,10 +16,29 @@ app.controller("LoginCtrl", function($scope, $window, AuthFactory){
     })
     .then((userData)=>{
       console.log(userData)
-      $scope.login()
+      $scope.loginFirstTime()
     },
     (error) => {
       console.log(`Error creating user: ${error}`)
+    })
+  }
+
+  $scope.loginFirstTime = () => {
+    console.log("you logged in")
+    AuthFactory.loginUser({
+      email: $scope.account.email,
+      password: $scope.account.password
+    })
+    .then((data) => {
+      if(data) {
+        $window.location.href = "#/profile"
+      } else {
+        $window.location.href = "#/login"
+      }
+      console.log("data", data)
+    },
+    (error) => {
+      console.log("hello error", error)
     })
   }
 
@@ -31,7 +50,7 @@ app.controller("LoginCtrl", function($scope, $window, AuthFactory){
     })
     .then((data) => {
       if(data) {
-        $window.location.href = "#/profile"
+        $window.location.href = "#/my-profile"
       } else {
         $window.location.href = "#/login"
       }

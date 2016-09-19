@@ -14,7 +14,8 @@ app.controller("MyProfileCtrl", function(
   $scope.attendingCount = Object.keys(currentProfile.attending || {}).length
   $scope.declinedCount = Object.keys(currentProfile.declined || {}).length
 
-  $scope.title = "My Profile"
+  $scope.title = "Profile"
+  $scope.parties = "Parties"
   $scope.profile = currentProfile
 
   $scope.ownerParties = ownerParties

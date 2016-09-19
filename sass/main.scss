@@ -45,6 +45,11 @@
   list-style: none;
 }
 
+.myParties,
+.myProfile {
+  display: block;
+}
+
 .party-btn {
   position: absolute;
   bottom: 20%;
