@@ -54,6 +54,18 @@ app.factory("PartyFactory", function($q, $http, FirebaseURL, AuthFactory){
     })
   }
 
+  let getPartiesByOwner = (userId) => {
+    return $q((resolve, reject) => {
+      $http.get(`${FirebaseURL}parties.json?orderBy="ownerID"&equalTo="${userId}"`)
+      .success(partyObjFromFirebase => {
+        resolve(partyObjFromFirebase)
+      })
+      .error(error => {
+        reject(error)
+      })
+    })
+  }
+
   let postPartyGuest = (partyId, guestId, userName, status) => {
     return $q((resolve, reject) => {
       $http.post(`${FirebaseURL}parties/${partyId}/${status}.json`,
@@ -86,7 +98,8 @@ app.factory("PartyFactory", function($q, $http, FirebaseURL, AuthFactory){
     deleteParty,
     getPartyById,
     postPartyGuest,
-    changePartyRSVP
+    changePartyRSVP,
+    getPartiesByOwner
   }
 
 })

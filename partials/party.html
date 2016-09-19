@@ -34,6 +34,10 @@
   <button ng-disabled="rsvp === 'declined'" ng-click="changeRSVP('declined')">Decline</button>
 </div>
 
+<div ng-show="owner">
+  <a ng-href="/#/invite/{{partyID}}">Invite Party People</a>
+</div>
+
 
 
 

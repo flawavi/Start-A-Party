@@ -1,9 +1,20 @@
 "use strict"
 
-app.controller("PartyCtrl", function($scope, currentParty, $routeParams, currentProfile, PartyFactory, ProfileFactory){
+app.controller("PartyCtrl", function(
+  $scope,
+  AuthFactory,
+  $routeParams,
+  currentParty,
+  PartyFactory,
+  ProfileFactory,
+  currentProfile
+  )
+{
 
   $scope.title = "This time let's party for real this time"
   $scope.party = currentParty
+  $scope.partyID = $routeParams.id
+  $scope.owner = AuthFactory.getUser().uid === currentParty.ownerID
 
   const refreshInvitees = () => {
     $scope.invitedCount = Object.keys(currentParty.invited || {}).length

@@ -23,6 +23,12 @@ const currentProfile = ($route, AuthFactory, ProfileFactory) => {
   })
 }
 
+const ownerParties = (AuthFactory, PartyFactory) => {
+  return AuthFactory.currentUser().then(user => {
+    return PartyFactory.getPartiesByOwner(user.uid)
+  })
+}
+
 app.config(function($routeProvider){
   $routeProvider
   .when("/", {
@@ -67,7 +73,8 @@ app.config(function($routeProvider){
     resolve: {
       currentUser,
       requireCurrentUser,
-      currentProfile
+      currentProfile,
+      ownerParties
     }
   })
   .when("/my-profile/:profileId", {
