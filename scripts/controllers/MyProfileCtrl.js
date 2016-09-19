@@ -4,6 +4,7 @@ app.controller("MyProfileCtrl", function(
   $scope,
   $location,
   AuthFactory,
+  ownerParties,
   ProfileFactory,
   currentProfile
   )
@@ -15,6 +16,8 @@ app.controller("MyProfileCtrl", function(
 
   $scope.title = "My Profile"
   $scope.profile = currentProfile
+
+  $scope.ownerParties = ownerParties
   console.log(currentProfile)
 
   $scope.deleteProfile = () => {

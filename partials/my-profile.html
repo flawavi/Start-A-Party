@@ -42,5 +42,11 @@
       <li><a ng-href="/#/party/{{party.partyId}}">{{party.partyName}}</a></li>
     </ul>
   </div>
+  <div>
+    <p>My Parties: </p>
+    <ul ng-repeat="(partyId, party) in ownerParties">
+      <li><a ng-href="/#/party/{{partyId}}">{{party.partyName}}></a></li>
+    </ul>
+  </div>
 
 </form>
