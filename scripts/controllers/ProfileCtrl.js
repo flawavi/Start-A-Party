@@ -17,7 +17,7 @@ app.controller("ProfileCtrl", function($scope, ProfileFactory, $location, curren
     ProfileFactory.postProfile($scope.newUserProfile)
     .then(() => {
       console.log($scope.newUserProfile, "newUserProfile")
-      $location.url("/party-form")
+      $location.url("/my-profile")
     })
   }
 
