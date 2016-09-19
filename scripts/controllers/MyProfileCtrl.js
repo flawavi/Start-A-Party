@@ -1,25 +1,21 @@
 "use strict"
 
-app.controller("MyProfileCtrl", function($scope, $location, ProfileFactory, AuthFactory) {
+app.controller("MyProfileCtrl", function(
+  $scope,
+  $location,
+  AuthFactory,
+  ProfileFactory,
+  currentProfile
+  )
+{
+
+  $scope.invitedCount = Object.keys(currentProfile.invited || {}).length
+  $scope.attendingCount = Object.keys(currentProfile.attending || {}).length
+  $scope.declinedCount = Object.keys(currentProfile.declined || {}).length
 
   $scope.title = "My Profile"
-
-    $scope.newUserProfile = {
-    name: "",
-    userName: "",
-    city: "",
-    age: ""
-  }
-
-  $scope.profileID = AuthFactory.getUser().uid
-
-  ProfileFactory.getProfileById($scope.profileID)
-    .then(response => {
-      for (var key in response) {
-        console.log(response[key], "responseKey")
-        $scope.newUserProfile = response[key];
-      }
-    });
+  $scope.profile = currentProfile
+  console.log(currentProfile)
 
   $scope.deleteProfile = () => {
     console.log("delete button clicked")
