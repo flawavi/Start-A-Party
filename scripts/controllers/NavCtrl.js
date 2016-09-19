@@ -1,6 +1,23 @@
 "use strict"
 
-app.controller("NavCtrl", function($scope, $location, AuthFactory, $window){
+app.controller("NavCtrl", function(
+  $scope,
+  $window,
+  $location,
+  AuthFactory,
+  ProfileFactory
+  ){
+
+  const currentProfile = () => {
+    return AuthFactory.currentUser().then(user => {
+      console.log("USER", user)
+      ProfileFactory.getProfileById(user.uid)
+      .then((user)=>{
+        $scope.userName = user.userName
+      })
+    })
+  }
+  currentProfile()
   $scope.isLoggedIn = false;
 
   $scope.logout = () => {

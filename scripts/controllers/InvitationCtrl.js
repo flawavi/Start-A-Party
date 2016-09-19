@@ -5,10 +5,10 @@ app.controller("InvitationCtrl", function(
   $location,
   AuthFactory,
   PartyFactory,
-  ProfileFactory,
-  SearchProfiles,
   currentParty,
-  $routeParams
+  $routeParams,
+  SearchProfiles,
+  ProfileFactory
   )
 {
   // $scope.searchText = SearchProfiles;
