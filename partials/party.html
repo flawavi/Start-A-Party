@@ -1,0 +1,24 @@
+<h1>{{title}}</h1>
+<div>
+  <p>Name: {{party.hostName}}</p>
+  <p>Details: {{party.occasion}}</p>
+  <p>Theme: {{party.theme}}</p>
+  <p>Location: {{party.location}}</p>
+  <p>Hours: {{party.finishTime}}</p>
+</div>
+<br>
+<div>
+  <p>Invited: {{invitedCount}}</p>
+  <ul ng-repeat="invitee in party.invited">
+    <li>{{invitee.userName}}</li>
+  </ul>
+
+</div>
+<div>
+  <p>Attending: {{attendingCount}}</p>
+
+</div>
+<div>
+  <p>Declined: {{declinedCount}}</p>
+
+</div>

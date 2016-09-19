@@ -54,11 +54,26 @@ app.factory("PartyFactory", function($q, $http, FirebaseURL, AuthFactory){
     })
   }
 
+  let postPartyGuest = (partyId, guestId, userName, status) => {
+    return $q((resolve, reject) => {
+      $http.post(`${FirebaseURL}parties/${partyId}/${status}.json`,
+      JSON.stringify({guestId, userName}))
+      .success((partyObjFromFirebase) => {
+        console.log(partyObjFromFirebase, "new Guest")
+        resolve(partyObjFromFirebase)
+      })
+      .error((error) => {
+          reject(error)
+      })
+    })
+  }
+
   return {
     postParty,
     patchParty,
     deleteParty,
-    getPartyById
+    getPartyById,
+    postPartyGuest
   }
 
 })
