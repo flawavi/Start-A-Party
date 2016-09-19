@@ -41,5 +41,9 @@ app.controller("MyProfileCtrl", function(
     })
   }
 
+  $scope.goToPartyForm = () => {
+    $location.url("party-form")
+  }
+
 
 })

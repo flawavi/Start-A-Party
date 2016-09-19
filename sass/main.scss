@@ -1,24 +1,51 @@
-h1  {
-  color: black;
+
+.angular-google-map-container {
+  height: 400px;
 }
 
-.pressthebutton {
-  width: 500px;
-  height: 500px;
-  font-size: 50px;
-  border-radius: 100%;
-  color: white;
-  background-color: #5DFC0A;
+.profileInfo {
+  text-align: left;
+  margin-left: 5%;
 }
 
-.angular-google-map-container { height: 400px; }
-
-html, body {
+.profileInfo h4 {
+  display: block;
+}
+/*html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-}
+}*/
 
 #map {
   height: 100%;
+  width: 75%;
+}
+
+#map_canvas {
+  height: 100%;
+  width: 75%;
+  margin: 0 auto;
+  border: 1px solid black;
+}
+
+.profileForm {
+  float: left;
+  text-align: left;
+  margin-left: 10%;
+}
+
+.otherInfo {
+  float: right;
+  margin-right: 10%;
+  justify-content: left;
+}
+
+.otherInfo li {
+  list-style: none;
+}
+
+.party-btn {
+  position: absolute;
+  bottom: 20%;
 }

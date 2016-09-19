@@ -1,16 +1,11 @@
 <h1>Party Forever</h1>
 <div id="map_canvas">
     <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options">
-        <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id">
+        <ui-gmap-marker coords="marker.coords" idkey="marker.id">
         </ui-gmap-marker>
     </ui-gmap-google-map>
     <button class="btn btn-success" ng-click="initMap()">Start A Party</button>
-    <button class="btn btn-info" ng-click="goToMyProfile()">My Profile</button>
     <button class="btn btn-warning" ng-click="invite()" ng-disabled="!geolocated">Create Invitations</button>
     <div ng-cloak>
-        <ul>
-            <li>coords update ctr: {{coordsUpdates}}</li>
-            <li>dynamic move ctr: {{dynamicMoveCtr}}</li>
-        </ul>
     </div>
 </div>

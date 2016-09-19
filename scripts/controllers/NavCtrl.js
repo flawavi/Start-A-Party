@@ -8,6 +8,15 @@ app.controller("NavCtrl", function(
   ProfileFactory
   ){
 
+  $scope.isLoggedIn = false
+  $scope.logout = () => {
+    console.log("LOGMEOUT")
+    AuthFactory.logoutUser().then(() => {
+      $scope.isLoggedIn = false;
+      $location.url("/login")
+    })
+  }
+
   const currentProfile = () => {
     return AuthFactory.currentUser().then(user => {
       console.log("USER", user)
@@ -18,35 +27,6 @@ app.controller("NavCtrl", function(
     })
   }
   currentProfile()
-  $scope.isLoggedIn = false;
-
-  $scope.logout = () => {
-    console.log("LOGMEOUT")
-    AuthFactory.logoutUser().then(() => {
-      $scope.isLoggedIn = false;
-      $location.url("/login")
-    });
-  }
-
-  AuthFactory.currentUser().then(() => {
-    $scope.isLoggedIn = true;
-  });
-
-  $scope.navItems = [
-      {
-        name: "Logout",
-        url: "#/logout"
-      },
-      {
-        name: "Start A Party",
-        url: "#/party-form"
-      },
-
-      {
-        name: "Your Profile",
-        url: "#/userprofile"
-      }
-  ]
 
   $scope.logout = () => {
     console.log("you logged out")
@@ -60,6 +40,17 @@ app.controller("NavCtrl", function(
       console.log("data", data)
     })
   }
+
+  AuthFactory.currentUser().then(() => {
+    $scope.isLoggedIn = true;
+  })
+
+  $scope.navItems = [
+      {name: "Logout", url: "#/logout"},
+      {name: "Start A Party", url: "#/party-form"},
+      {name: "Your Profile", url: "#/userprofile"}
+  ]
+
 
   $scope.isActive = viewLocation => viewLocation === $location.path();
 
