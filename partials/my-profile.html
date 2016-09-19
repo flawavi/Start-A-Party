@@ -24,26 +24,23 @@
   <br>
   <div>
     <p>Invited: {{invitedCount}}</p>
-    <ul ng-repeat="invitee in profile.invited">
-      <li>{{invitee.userName}}</li>
+    <ul ng-repeat="party in profile.invited">
+      <li><a ng-href="/#/party/{{party.partyId}}">{{party.partyName}}</a></li>
     </ul>
 
   </div>
   <div>
     <p>Attending: {{attendingCount}}</p>
-    <ul ng-repeat="invitee in profile.attending">
-      <li>{{invitee.userName}}</li>
+    <ul ng-repeat="party in profile.attending">
+      <li><a ng-href="/#/party/{{party.partyId}}">{{party.partyName}}</a></li>
     </ul>
 
   </div>
   <div>
     <p>Declined: {{declinedCount}}</p>
-    <ul ng-repeat="invitee in profile.declined">
-      <li>{{invitee.userName}}</li>
+    <ul ng-repeat="party in profile.declined">
+      <li><a ng-href="/#/party/{{party.partyId}}">{{party.partyName}}</a></li>
     </ul>
   </div>
 
-<!--   <button type="" class="btn btn-warning" ng-click="editProfile()">Edit</button>
-  <button type="" class="btn btn-danger" ng-click="deleteProfile()">Delete Profile</button>
- -->
 </form>
