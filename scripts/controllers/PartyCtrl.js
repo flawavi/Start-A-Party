@@ -33,7 +33,7 @@ app.controller("PartyCtrl", function(
 
   refreshInvitees()
 
-  const getRSVP = () => {
+  const getRSVPStatus = () => {
     const invitedKeys = Object.keys(currentParty.invited || {})
     const invited = invitedKeys.map(key => currentParty.invited[key])
     if (invited.find(inv => inv.guestId === currentProfile.id)) return "invited"
@@ -48,24 +48,24 @@ app.controller("PartyCtrl", function(
   }
 
   const getRSVPKey = () => {
-    const rsvp = getRSVP()
+    const rsvp = getRSVPStatus()
     return Object.keys(currentParty[rsvp] || {}.find(key => {
       return currentParty[rsvp][key].guestId === currentProfile.id
     }))
   }
 
   const getInviteKey = () => {
-    const rsvp = getRSVP()
+    const rsvp = getRSVPStatus()
     return Object.keys(currentProfile[rsvp] || {}.find(key => {
       return currentProfile[rsvp][key].partyId === $routeParams.id
     }))
   }
 
-  $scope.rsvp = getRSVP()
+  $scope.rsvp = getRSVPStatus()
 
   $scope.changeRSVP = (newRsvp) => {
     const currentRsvp = $scope.rsvp
-    const rsvpKey = getRSVP()
+    const rsvpKey = getRSVPStatus()
 
     PartyFactory.changePartyRSVP(
       $routeParams.id,//partyId
