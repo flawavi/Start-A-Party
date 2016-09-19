@@ -50,6 +50,18 @@ app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location, AuthFa
     })
   }
 
+  let changePartyInvite = (guestId, partyId, partyName, rsvpKey, currentStatus, newStatus) => {
+    return $q((resolve, reject) => {
+      $http.delete(`${FirebaseURL}profiles/${guestId}/${currentStatus}/${rsvpKey}json`)
+      .success(() => {
+        resolve(postPartyInvite(guestId, partyId, partyName, newStatus))
+      })
+      .error((error) => {
+          reject(error)
+      })
+    })
+  }
+
   let patchProfile = (profileId, updatedProfile) => {
     return $q((resolve, reject) => {
       $http.patch(`${FirebaseURL}profiles.${profileId}.json`,
@@ -82,9 +94,9 @@ app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location, AuthFa
       .success(profileObjFromFirebase => {
         console.log(profileObjFromFirebase)
         const id = Object.keys(profileObjFromFirebase)[0]
-        const p = profileObjFromFirebase[id]
-        console.log(p)
-        resolve(profileObjFromFirebase[id])
+        const profile = profileObjFromFirebase[id]
+        profile.id = id
+        resolve(profile)
       })
       .error(error => {
         reject(error)
@@ -114,7 +126,8 @@ app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location, AuthFa
     getProfiles,
     getProfileById,
     getProfileByUserName,
-    postPartyInvite
+    postPartyInvite,
+    changePartyInvite
   }
 
 })

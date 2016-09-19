@@ -89,7 +89,8 @@ app.config(function($routeProvider){
     resolve: {
       currentUser,
       requireCurrentUser,
-      currentParty
+      currentParty,
+      currentProfile
     }
   })
   .otherwise("/")

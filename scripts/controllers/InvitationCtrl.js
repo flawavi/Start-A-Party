@@ -37,7 +37,7 @@ app.controller("InvitationCtrl", function(
         ProfileFactory.postPartyInvite(
         $scope.inviteeID,
         $routeParams.id,
-        currentParty.name,
+        currentParty.partyName,
         "invited"
       ).then(()=> {
         $scope.inviteeID = null
@@ -48,7 +48,7 @@ app.controller("InvitationCtrl", function(
   }
 
   $scope.done = () => {
-    $location.url(`/parties/${$routeParams.id}`)
+    $location.url(`/party/${$routeParams.id}`)
   }
 
 

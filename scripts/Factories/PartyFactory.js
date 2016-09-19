@@ -68,12 +68,25 @@ app.factory("PartyFactory", function($q, $http, FirebaseURL, AuthFactory){
     })
   }
 
+  let changePartyRSVP = (partyId, guestId, userName, rsvpKey, currentStatus, newStatus) => {
+    return $q((resolve, reject) => {
+      $http.delete(`${FirebaseURL}parties/${partyId}/${currentStatus}/${rsvpKey}.json`)
+      .success(() => {
+        resolve(postPartyGuest(partyId, guestId, userName, newStatus))
+      })
+      .error((error) => {
+          reject(error)
+      })
+    })
+  }
+
   return {
     postParty,
     patchParty,
     deleteParty,
     getPartyById,
-    postPartyGuest
+    postPartyGuest,
+    changePartyRSVP
   }
 
 })

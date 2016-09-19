@@ -27,3 +27,14 @@
     <li>{{invitee.userName}}</li>
   </ul>
 </div>
+
+<div ng-show="rsvp">
+  <p>RSVP: {{rsvp}}</p>
+  <button ng-disabled="rsvp === 'attending'" ng-click="changeRSVP('attending')">Attend</button>
+  <button ng-disabled="rsvp === 'declined'" ng-click="changeRSVP('declined')">Decline</button>
+</div>
+
+
+
+
+
