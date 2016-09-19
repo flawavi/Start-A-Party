@@ -7,6 +7,12 @@
   <p>Hours: {{party.finishTime}}</p>
 </div>
 <br>
+<div id="map_canvas">
+  <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options">
+    <ui-gmap-marker coords="marker.coords" idkey="marker.id">
+    </ui-gmap-marker>
+  </ui-gmap-google-map>
+</div>
 <div>
   <p>Invited: {{invitedCount}}</p>
   <ul ng-repeat="invitee in party.invited">
@@ -27,6 +33,7 @@
     <li>{{invitee.userName}}</li>
   </ul>
 </div>
+
 
 <div ng-show="rsvp">
   <p>RSVP: {{rsvp}}</p>

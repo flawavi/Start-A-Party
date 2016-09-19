@@ -68,71 +68,43 @@ app.controller("GeoLocateCtrl", function(
   }
   $scope.$watchCollection("marker.coords", function (newVal, oldVal) {
     if (_.isEqual(newVal, oldVal))
-      return;
-    $scope.coordsUpdates++;
-  });
+      return
+    $scope.coordsUpdates++
+  })
   $timeout(function () {
     $scope.marker.coords = {
-      latitude: 42.1451,
-      longitude: -100.6680
-    };
-    $scope.dynamicMoveCtr++;
-    $timeout(function () {
-      $scope.marker.coords = {
-        latitude: 43.1451,
-        longitude: -102.6680
-      };
-      $scope.dynamicMoveCtr++;
-    }, 2000);
-  }, 1000);
+      latitude: 11.8251,
+      longitude: 42.5903
+    }
+  }, 1000)
 
   $scope.initMap = function initMap() {
     console.log("are we working?")
-    // var map = new google.maps.Map(document.getElementById('map'), {
-    //   center: {lat: -34.397, lng: 150.644},
-    //   zoom: 6
-    // });
-    // var infoWindow = new google.maps.InfoWindow({map: map});
     console.log(navigator.geolocation)
 
-    // Try HTML5 geolocation.
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(position) {
-        var pos = {
+
+        let pos = {
           center: {
-
             latitude: position.coords.latitude,
-            longitude: position.coords.longitude},
-
-            zoom: 20
-
-          };
-        console.log(position, "position")
+            longitude: position.coords.longitude
+          },
+          zoom: 20
+        }
         $scope.map = pos
         lat = pos.center.latitude
         long = pos.center.longitude
         $scope.geolocated = true
-
+        $scope.marker = {
+          coords: {
+            latitude: position.coords.latitude,
+            longitude: position.coords.longitude
+          },
+          id: "party"
+        }
         $scope.$apply()
-        // checks for changes, runs angular digest process
-        // infoWindow.setPosition(pos);
-        // infoWindow.setContent('Location found.');
-        // map.setCenter(pos);
-      },
-      function() {
-        // handleLocationError(true, infoWindow, map.getCenter());
-      });
-    } else {
-        // Browser doesn't support Geolocation
-        // handleLocationError(false, infoWindow, map.getCenter());
-      }
+      })
+    }
   }
-
-  // function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-  //   infoWindow.setPosition(pos);
-  //   infoWindow.setContent(browserHasGeolocation ?
-  //                         'Error: The Geolocation service failed.' :
-  //                         'Error: Your browser doesn\'t support geolocation.');
-  // }
-
 })

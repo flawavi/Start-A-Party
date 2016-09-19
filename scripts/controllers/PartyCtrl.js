@@ -11,10 +11,19 @@ app.controller("PartyCtrl", function(
   )
 {
 
+  $scope.map = { center: { latitude: currentParty.lat, longitude: currentParty.long }, zoom: 20}
   $scope.title = "This time, let's party for real this time"
   $scope.party = currentParty
   $scope.partyID = $routeParams.id
   $scope.owner = AuthFactory.getUser().uid === currentParty.ownerID
+
+  $scope.marker = {
+    coords: {
+      latitude: currentParty.lat,
+      longitude: currentParty.long
+    },
+    id: 0
+  }
 
   const refreshInvitees = () => {
     $scope.invitedCount = Object.keys(currentParty.invited || {}).length
