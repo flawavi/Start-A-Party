@@ -14,6 +14,7 @@ app.controller("StartAPartyCtrl", function($scope, $location, uiGmapGoogleMapApi
 
   $scope.newParty = {
 
+    partyName: "",
     hostName: "",
     theme: "",
     finishTime: "",

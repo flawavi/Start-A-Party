@@ -16,9 +16,14 @@
 </div>
 <div>
   <p>Attending: {{attendingCount}}</p>
+  <ul ng-repeat="invitee in party.attending">
+    <li>{{invitee.userName}}</li>
+  </ul>
 
 </div>
 <div>
   <p>Declined: {{declinedCount}}</p>
-
+  <ul ng-repeat="invitee in party.declined">
+    <li>{{invitee.userName}}</li>
+  </ul>
 </div>

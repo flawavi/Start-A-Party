@@ -16,6 +16,12 @@ const redirectCurrentUser = AuthFactory => AuthFactory.currentUser().then(user =
 const currentParty = ($route, PartyFactory) => {
   return PartyFactory.getPartyById($route.current.params.id)
 }
+const currentProfile = ($route, AuthFactory, ProfileFactory) => {
+  return AuthFactory.currentUser().then(user => {
+    console.log("USER", user)
+    return ProfileFactory.getProfileById(user.uid)
+  })
+}
 
 app.config(function($routeProvider){
   $routeProvider
@@ -60,7 +66,8 @@ app.config(function($routeProvider){
     controller: "MyProfileCtrl",
     resolve: {
       currentUser,
-      requireCurrentUser
+      requireCurrentUser,
+      currentProfile
     }
   })
   .when("/my-profile/:profileId", {

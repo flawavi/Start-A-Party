@@ -80,7 +80,11 @@ app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location, AuthFa
     return $q((resolve, reject) => {
       $http.get(`${FirebaseURL}profiles.json?orderBy="uid"&equalTo="${profileId}"`)
       .success(profileObjFromFirebase => {
-        resolve(profileObjFromFirebase)
+        console.log(profileObjFromFirebase)
+        const id = Object.keys(profileObjFromFirebase)[0]
+        const p = profileObjFromFirebase[id]
+        console.log(p)
+        resolve(profileObjFromFirebase[id])
       })
       .error(error => {
         reject(error)
