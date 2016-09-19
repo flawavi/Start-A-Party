@@ -87,7 +87,8 @@ app.config(function($routeProvider){
     resolve: {
       currentUser,
       requireCurrentUser,
-      currentParty
+      currentParty,
+      currentProfile
     }
   })
   .when("/party/:id", {
