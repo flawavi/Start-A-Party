@@ -18,12 +18,11 @@ app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location, AuthFa
     })
   }
 
-    let getProfiles = (userId) => {
+    let getProfiles = () => {
       let profiles = []
     return $q((resolve, reject) => {
       $http.get(`${FirebaseURL}profiles.json`)
       .success((profileObj)=>{
-        // console.log(profileObj, "profileObj")
         if (profileObj !== null){
           resolve(profileObj)
         } else {
@@ -33,11 +32,23 @@ app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location, AuthFa
       })
       .error((error) => {
         reject(error);
-      })//.success does parsing for us
+      })
     })
   }
 
-
+  let postPartyInvite = (guestId, partyId, partyName, status) => {
+    return $q((resolve, reject) => {
+      $http.post(`${FirebaseURL}profiles/${guestId}/${status}.json`,
+      JSON.stringify({partyId, partyName}))
+      .success((partyObjFromFirebase) => {
+        console.log(partyObjFromFirebase, "new Party Invite")
+        resolve(partyObjFromFirebase)
+      })
+      .error((error) => {
+          reject(error)
+      })
+    })
+  }
 
   let patchProfile = (profileId, updatedProfile) => {
     return $q((resolve, reject) => {
@@ -98,7 +109,8 @@ app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location, AuthFa
     patchProfile,
     getProfiles,
     getProfileById,
-    getProfileByUserName
+    getProfileByUserName,
+    postPartyInvite
   }
 
 })

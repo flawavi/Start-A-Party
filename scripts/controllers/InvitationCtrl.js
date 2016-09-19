@@ -2,47 +2,55 @@
 
 app.controller("InvitationCtrl", function(
   $scope,
+  $location,
   AuthFactory,
   PartyFactory,
   ProfileFactory,
   SearchProfiles,
-  currentParty
+  currentParty,
+  $routeParams
   )
 {
   // $scope.searchText = SearchProfiles;
 
   console.log(currentParty)
   $scope.message = "Who gon' be @ dis pardee??"
+  $scope.userName = ""
+  $scope.inviteeID = null
 
-  $scope.invitation = {
-    name: "",
-    userName: "",
-    age: "",
-    city: ""
-  }
+  $scope.inviteeInfo = {}
 
   $scope.findUser = () => {
     ProfileFactory.getProfileByUserName($scope.userName)
       .then(response => {
-        for (var key in response) {
-        $scope.invitation = response[key]
-        }
+        $scope.inviteeID = Object.keys(response)[0]
+        $scope.inviteeInfo = response[$scope.inviteeID]
       })
   }
-
-  $scope.profileID = AuthFactory.getUser().uid
-  ProfileFactory.getProfileById($scope.profileID)
-    .then(response => {
-      for (var key in response) {
-        $scope.userName = response[key].userName
-        console.log($scope.userName)
-      }
-      ProfileFactory.getProfileByUserName($scope.userName)
-        .then(response => {
-          console.log(response)
-          $scope.invitation = response[key]
-        })
+  $scope.sendInvite = () => {
+    PartyFactory.postPartyGuest(
+      $routeParams.id,
+      $scope.inviteeID,
+      $scope.userName,
+      "invited"
+      ).then(()=> {
+        ProfileFactory.postPartyInvite(
+        $scope.inviteeID,
+        $routeParams.id,
+        currentParty.name,
+        "invited"
+      ).then(()=> {
+        $scope.inviteeID = null
+        $scope.inviteeInfo = {}
+        $scope.userName = ""
+      })
     })
+  }
+
+  $scope.done = () => {
+    $location.url(`/parties/${$routeParams.id}`)
+  }
+
 
 })
 

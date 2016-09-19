@@ -76,6 +76,15 @@ app.config(function($routeProvider){
       currentParty
     }
   })
+  .when("/party/:id", {
+    templateUrl: "partials/party.html",
+    controller: "PartyCtrl",
+    resolve: {
+      currentUser,
+      requireCurrentUser,
+      currentParty
+    }
+  })
   .otherwise("/")
 })
 
