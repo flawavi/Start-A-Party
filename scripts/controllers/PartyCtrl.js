@@ -25,6 +25,8 @@ app.controller("PartyCtrl", function(
     id: 0
   }
 
+
+
   const refreshInvitees = () => {
     $scope.invitedCount = Object.keys(currentParty.invited || {}).length
     $scope.attendingCount = Object.keys(currentParty.attending || {}).length
@@ -83,6 +85,7 @@ app.controller("PartyCtrl", function(
         currentRsvp,
         newRsvp
       ).then((result) => {
+        console.log(rsvpKey)
         delete currentParty[currentRsvp][rsvpKey]//removes rsvp key from object
         if (!currentParty[newRsvp]) currentParty[newRsvp] = {}//creates new "attending" list if one doesn't already exist
         currentParty[newRsvp][result.name] = {//adds user to new list

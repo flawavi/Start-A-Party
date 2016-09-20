@@ -9,6 +9,7 @@ app.controller("NavCtrl", function(
   ){
 
   $scope.isLoggedIn = false
+  $scope.userName = "Signed in as " + AuthFactory.currentUser.userName
   $scope.logout = () => {
     console.log("LOGMEOUT")
     AuthFactory.logoutUser().then(() => {

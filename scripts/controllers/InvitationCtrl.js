@@ -7,7 +7,6 @@ app.controller("InvitationCtrl", function(
   PartyFactory,
   currentParty,
   $routeParams,
-  SearchProfiles,
   ProfileFactory
   )
 {
