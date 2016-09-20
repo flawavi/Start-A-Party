@@ -51,23 +51,24 @@ app.controller("PartyCtrl", function(
 
   const getRSVPKey = () => {
     const rsvp = getRSVPStatus()
-    return Object.keys(currentParty[rsvp] || {}.find(key => {
+    return Object.keys(currentParty[rsvp] || {}).find(key => {
       return currentParty[rsvp][key].guestId === currentProfile.id
-    }))
+    })
   }
 
   const getInviteKey = () => {
     const rsvp = getRSVPStatus()
-    return Object.keys(currentProfile[rsvp] || {}.find(key => {
+    return Object.keys(currentProfile[rsvp] || {}).find(key => {
       return currentProfile[rsvp][key].partyId === $routeParams.id
-    }))
+    })
   }
 
+  console.log(getRSVPStatus())
   $scope.rsvp = getRSVPStatus()
 
   $scope.changeRSVP = (newRsvp) => {
     const currentRsvp = $scope.rsvp
-    const rsvpKey = getRSVPStatus()
+    const rsvpKey = getRSVPKey()
 
     PartyFactory.changePartyRSVP(
       $routeParams.id,//partyId

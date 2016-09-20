@@ -52,8 +52,7 @@ app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location, AuthFa
 
   let changePartyInvite = (guestId, partyId, partyName, rsvpKey, currentStatus, newStatus) => {
     return $q((resolve, reject) => {
-      console.log(currentStatus, rsvpKey, guestId)
-
+      console.log('>>>>>changePartyInvite', currentStatus, rsvpKey, guestId)
       $http.delete(`${FirebaseURL}profiles/${guestId}/${currentStatus}/${rsvpKey}.json`)
       .success(() => {
         resolve(postPartyInvite(guestId, partyId, partyName, newStatus))
