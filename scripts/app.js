@@ -79,7 +79,7 @@ app.config(function($routeProvider){
   })
   .when("/my-profile/:profileId", {
     templateUrl: "partials/my-profile.html",
-    controller: "MyProfileCtrl",
+    controller: "MyProfileCtrl"
   })
   .when("/invite/:id", {
     templateUrl: "partials/invitation.html",

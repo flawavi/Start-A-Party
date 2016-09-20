@@ -25,6 +25,8 @@ app.controller("PartyCtrl", function(
     id: 0
   }
 
+
+
   const refreshInvitees = () => {
     $scope.invitedCount = Object.keys(currentParty.invited || {}).length
     $scope.attendingCount = Object.keys(currentParty.attending || {}).length
@@ -33,7 +35,7 @@ app.controller("PartyCtrl", function(
 
   refreshInvitees()
 
-  const getRSVP = () => {
+  const getRSVPStatus = () => {
     const invitedKeys = Object.keys(currentParty.invited || {})
     const invited = invitedKeys.map(key => currentParty.invited[key])
     if (invited.find(inv => inv.guestId === currentProfile.id)) return "invited"
@@ -48,24 +50,25 @@ app.controller("PartyCtrl", function(
   }
 
   const getRSVPKey = () => {
-    const rsvp = getRSVP()
-    return Object.keys(currentParty[rsvp] || {}.find(key => {
+    const rsvp = getRSVPStatus()
+    return Object.keys(currentParty[rsvp] || {}).find(key => {
       return currentParty[rsvp][key].guestId === currentProfile.id
-    }))
+    })
   }
 
   const getInviteKey = () => {
-    const rsvp = getRSVP()
-    return Object.keys(currentProfile[rsvp] || {}.find(key => {
+    const rsvp = getRSVPStatus()
+    return Object.keys(currentProfile[rsvp] || {}).find(key => {
       return currentProfile[rsvp][key].partyId === $routeParams.id
-    }))
+    })
   }
 
-  $scope.rsvp = getRSVP()
+  console.log(getRSVPStatus())
+  $scope.rsvp = getRSVPStatus()
 
   $scope.changeRSVP = (newRsvp) => {
     const currentRsvp = $scope.rsvp
-    const rsvpKey = getRSVP()
+    const rsvpKey = getRSVPKey()
 
     PartyFactory.changePartyRSVP(
       $routeParams.id,//partyId
@@ -83,6 +86,7 @@ app.controller("PartyCtrl", function(
         currentRsvp,
         newRsvp
       ).then((result) => {
+        console.log(rsvpKey)
         delete currentParty[currentRsvp][rsvpKey]//removes rsvp key from object
         if (!currentParty[newRsvp]) currentParty[newRsvp] = {}//creates new "attending" list if one doesn't already exist
         currentParty[newRsvp][result.name] = {//adds user to new list
