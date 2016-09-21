@@ -9,10 +9,15 @@ app.controller("NavCtrl", function(
   ){
 
   $scope.isLoggedIn = false
-  $scope.userName = "Signed in as " + AuthFactory.currentUser.userName
+  AuthFactory.currentUser().then(user => {
+    ProfileFactory.getProfileById(user.uid)
+    .then(profile => {
+      $scope.isLoggedIn = true
+      $scope.userName = "Signed in as " + profile.userName
+    })
+  })
 
   $scope.logout = () => {
-
     AuthFactory.logoutUser().then(data => {
       $scope.isLoggedIn = false;
       if(data) {
@@ -21,32 +26,8 @@ app.controller("NavCtrl", function(
         $window.location.href = "#/login"
       }
       $location.url("/login")
-
     })
   }
-
-  const currentProfile = () => {
-    return AuthFactory.currentUser().then(user => {
-
-      ProfileFactory.getProfileById(user.uid)
-      .then((user)=>{
-        $scope.userName = user.userName
-      })
-    })
-  }
-  currentProfile()
-
-    AuthFactory.currentUser().then(() => {
-    $scope.isLoggedIn = true;
-  })
-
-
-
-  // $scope.navItems = [
-  //     {name: "Logout", url: "#/logout"},
-  //     {name: "Start A Party", url: "#/party-form"},
-  //     {name: "Your Profile", url: "#/userprofile"}
-  // ]
 
 
   $scope.isActive = viewLocation => viewLocation === $location.path();
