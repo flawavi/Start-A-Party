@@ -2,13 +2,12 @@
 
 app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location, AuthFactory){
 
-  let postProfile = (newProfile) => {
+  let postProfile = newProfile => {
     newProfile.uid = AuthFactory.getUser().uid
-    console.log("newProfile", newProfile.uid)
     return $q((resolve, reject) => {
       $http.post(`${FirebaseURL}/profiles.json`,
       JSON.stringify(newProfile))
-      .success((objFromFirebase) => {
+      .success(objFromFirebase => {
         console.log(objFromFirebase, "new Profile object")
         resolve(objFromFirebase)
       })
@@ -22,11 +21,10 @@ app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location, AuthFa
       let profiles = []
     return $q((resolve, reject) => {
       $http.get(`${FirebaseURL}profiles.json`)
-      .success((profileObj)=>{
+      .success(profileObj => {
         if (profileObj !== null){
           resolve(profileObj)
         } else {
-          console.log(profileObj, "profile")
           resolve(profileObj)
         }
       })
@@ -40,7 +38,7 @@ app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location, AuthFa
     return $q((resolve, reject) => {
       $http.post(`${FirebaseURL}profiles/${guestId}/${status}.json`,
       JSON.stringify({partyId, partyName}))
-      .success((partyObjFromFirebase) => {
+      .success(partyObjFromFirebase => {
         console.log(partyObjFromFirebase, "new Party Invite")
         resolve(partyObjFromFirebase)
       })
@@ -57,7 +55,7 @@ app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location, AuthFa
       .success(() => {
         resolve(postPartyInvite(guestId, partyId, partyName, newStatus))
       })
-      .error((error) => {
+      .error(error => {
           reject(error)
       })
     })
@@ -76,7 +74,7 @@ app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location, AuthFa
     })
   }
 
-  let deleteProfile = (profileId) => {
+  let deleteProfile = profileId => {
     profileId = AuthFactory.getUser().uid
     console.log(profileId)
     return $q((resolve) => {
@@ -88,7 +86,7 @@ app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location, AuthFa
     })
   }
 
-  let getProfileById = (profileId) => {
+  let getProfileById = profileId => {
     console.log(profileId, "profileId")
     return $q((resolve, reject) => {
       $http.get(`${FirebaseURL}profiles.json?orderBy="uid"&equalTo="${profileId}"`)
@@ -105,11 +103,11 @@ app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location, AuthFa
     })
   }
 
-  let getProfileByUserName = (userName) => {
+  let getProfileByUserName = userName => {
     console.log(userName, "userName")
     return $q((resolve, reject) => {
       $http.get(`${FirebaseURL}profiles.json?orderBy="userName"&equalTo="${userName}"`)
-      .success((profileObjFromFirebase) => {
+      .success(profileObjFromFirebase => {
         console.log(profileObjFromFirebase, "profile from firebase")
         resolve(profileObjFromFirebase)
       })

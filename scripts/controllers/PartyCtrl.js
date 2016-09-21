@@ -12,7 +12,7 @@ app.controller("PartyCtrl", function(
 {
 
   $scope.map = { center: { latitude: currentParty.lat, longitude: currentParty.long }, zoom: 20}
-  $scope.title = "P.A.R.T. Why?"
+  $scope.partyName = currentParty.partyName
   $scope.party = currentParty
   $scope.partyID = $routeParams.id
   $scope.owner = AuthFactory.getUser().uid === currentParty.ownerID
@@ -63,12 +63,12 @@ app.controller("PartyCtrl", function(
     })
   }
 
-  console.log(getRSVPStatus())
   $scope.rsvp = getRSVPStatus()
 
-  $scope.changeRSVP = (newRsvp) => {
+  $scope.changeRSVP = newRsvp => {
     const currentRsvp = $scope.rsvp
     const rsvpKey = getRSVPKey()
+    const inviteKey = getInviteKey()
 
     PartyFactory.changePartyRSVP(
       $routeParams.id,//partyId
@@ -77,21 +77,27 @@ app.controller("PartyCtrl", function(
       rsvpKey,//current party invitation key
       currentRsvp,//existing status
       newRsvp//new status
-    ).then((result) => {
+    ).then(partyResult => {
       ProfileFactory.changePartyInvite(
         currentProfile.id,
         $routeParams.id,//partyId
         currentParty.partyName,
-        getInviteKey(),
+        inviteKey,
         currentRsvp,
         newRsvp
-      ).then((result) => {
-        console.log(rsvpKey)
+      ).then(profileResult => {
+
         delete currentParty[currentRsvp][rsvpKey]//removes rsvp key from object
         if (!currentParty[newRsvp]) currentParty[newRsvp] = {}//creates new "attending" list if one doesn't already exist
-        currentParty[newRsvp][result.name] = {//adds user to new list
+        currentParty[newRsvp][partyResult.name] = {//adds user to new list
           guestId: currentProfile.id,
           userName: currentProfile.userName
+        }
+        delete currentProfile[currentRsvp][inviteKey]
+        if (!currentProfile[newRsvp]) currentProfile[newRsvp] = {}//creates new "attending" list if one doesn't already exist
+        currentProfile[newRsvp][profileResult.name] = {//adds user to new list
+          partyId: currentParty.id,
+          partyName: currentParty.partyName
         }
         refreshInvitees()
         $scope.rsvp = newRsvp
