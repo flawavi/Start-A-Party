@@ -7,15 +7,14 @@
   </div>
 
   <div class="form-group">
-    <p>{{inviteeInfo.name}}</p>
-    <p>{{inviteeInfo.userName}}</p>
-    <p>{{inviteeInfo.age}}</p>
-    <p>{{inviteeInfo.city}}</p>
+    <p>{{user}} {{inviteeInfo.userName}}</p>
+    <p>{{name}} {{inviteeInfo.name}}</p>
+    <p>{{location}} {{inviteeInfo.city}}</p>
+    <p>{{age}} {{inviteeInfo.age}}</p>
   </div>
 
-  <!-- <button type="" class="btn btn-success" ng-click="invite()">Send Invites</button> -->
-  <!-- <button type="" class="btn btn-success" ng-click="invite()">Add Guest</button> -->
   <button type="" class="btn btn-success" ng-click="findUser()">Show Results</button>
-  <button type="" class="btn btn-success" ng-click="sendInvite()" ng-disabled="!inviteeID">Send</button><button type="" class="btn btn-success" ng-click="done()">Go Party</button>
+  <button type="" class="btn btn-success" ng-click="sendInvite()" ng-disabled="!inviteeID">Send Invitation</button>
+  <button type="" class="btn btn-success" ng-click="done()">Go Party</button>
 
 </form>

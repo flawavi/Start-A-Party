@@ -22,8 +22,16 @@ app.controller("InvitationCtrl", function(
   $scope.findUser = () => {
     ProfileFactory.getProfileByUserName($scope.userName)
       .then(response => {
+        $scope.name = "Name: "
+        $scope.user = "Username: "
+        $scope.location = "City: "
+        $scope.age = "Age: "
         $scope.inviteeID = Object.keys(response)[0]
         $scope.inviteeInfo = response[$scope.inviteeID]
+        $scope.name = ""
+        $scope.user = ""
+        $scope.location = ""
+        $scope.age = ""
       })
   }
   $scope.sendInvite = () => {

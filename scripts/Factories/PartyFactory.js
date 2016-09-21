@@ -32,8 +32,6 @@ app.factory("PartyFactory", function($q, $http, FirebaseURL, AuthFactory){
   }
 
   let deleteParty = (partyId) => {
-    partyId.uid = AuthFactory.getUser().uid
-    partyId = partyId.uid
     return $q((resolve, reject) => {
       $http.delete(`${FirebaseURL}parties/${partyId}.json`)
       .success((partyObjFromFirebase) => {

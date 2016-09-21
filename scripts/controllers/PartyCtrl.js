@@ -2,6 +2,7 @@
 
 app.controller("PartyCtrl", function(
   $scope,
+  $location,
   AuthFactory,
   $routeParams,
   currentParty,
@@ -24,7 +25,11 @@ app.controller("PartyCtrl", function(
     id: 0
   }
 
-
+  $scope.deleteParty = () => {
+    console.log("clicked", "partyId")
+    PartyFactory.deleteParty($scope.partyID)
+    $location.url("/party-form")
+  }
 
   const refreshInvitees = () => {
     $scope.invitedCount = Object.keys(currentParty.invited || {}).length

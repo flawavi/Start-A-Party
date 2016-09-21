@@ -1,11 +1,12 @@
 <h1>{{partyName}}</h1>
 <div class="partyDetails">
   <div>
-    <p>NAME: {{party.hostName}}</p>
-    <p>DETAILS: {{party.occasion}}</p>
+    <p>HOST: {{party.hostName}}</p>
+    <p>OCCASION: {{party.occasion}}</p>
     <p>THEME: {{party.theme}}</p>
-    <p>LOCATION: {{party.location}}</p>
-    <p>HOURS: {{party.finishTime}}</p>
+    <p>WHERE: {{party.location}}</p>
+    <p>LEAVE: {{party.finishTime}}</p>
+    <button class="btn btn-danger" ng-click="deleteParty()">Delete Party</button>
   </div>
 </div>
 <div class="inviteeStatus">
@@ -33,8 +34,8 @@
     <button ng-disabled="rsvp === 'declined'" ng-click="changeRSVP('declined')">Decline</button>
   </div>
 
-  <div ng-show="owner">
-    <a ng-href="/#/invite/{{partyID}}">Invite Party People</a>
+  <div  ng-show="owner">
+    <button class="btn btn-success"><a class="invite-party-people" ng-href="/#/invite/{{partyID}}">Invite Party People</a></button>
   </div>
 </div>
 
