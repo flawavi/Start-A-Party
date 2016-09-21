@@ -12,10 +12,12 @@ app.controller("GeoLocateCtrl", function(
   )
 {
 
-
-
-  let lat = 11.8251
-  let long = 42.5903
+  let randomLat = () => (Math.random()*90 - Math.random()*80),
+      randomLong = () => (Math.random()*180 - Math.random()*100),
+      randLat = randomLat(),
+      randLong = randomLong(),
+      lat,
+      long
 
   $scope.geolocated = false
 
@@ -23,8 +25,6 @@ app.controller("GeoLocateCtrl", function(
     profileId = AuthFactory.getUser().uid
     $location.url(`/my-profile/${profileId}`)
   }
-
-
 
   $scope.invite = () => {
     PartyFactory.patchParty($routeParams.id, {lat, long})
@@ -42,7 +42,7 @@ app.controller("GeoLocateCtrl", function(
 
   $scope.message = "hello"
 
-  $scope.map = { center: { latitude: 11.8251, longitude: 42.5903 }, zoom: 8}
+  $scope.map = { center: { latitude: randLat, longitude: randLong }, zoom: 5}
 
   $scope.options = {scrollwheel: false};
 
@@ -51,8 +51,8 @@ app.controller("GeoLocateCtrl", function(
   $scope.marker = {
     id: 0,
     coords: {
-      latitude: 11.8251,
-      longitude: 42.5903
+      latitude: randLat,
+      longitude: randLong
     },
 
     options: {draggable: true},
@@ -80,8 +80,8 @@ app.controller("GeoLocateCtrl", function(
   })
   $timeout(function () {
     $scope.marker.coords = {
-      latitude: 11.8251,
-      longitude: 42.5903
+      latitude: randLat,
+      longitude: randLong
     }
   }, 1000)
 

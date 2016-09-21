@@ -76,22 +76,18 @@ app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location, AuthFa
 
   let deleteProfile = profileId => {
     profileId = AuthFactory.getUser().uid
-
     return $q((resolve) => {
       $http.delete(`${FirebaseURL}profiles/${profileId}.json`)
       .success(profileObjFromFirebase => {
-
         resolve(profileObjFromFirebase)
       })
     })
   }
 
   let getProfileById = profileId => {
-
     return $q((resolve, reject) => {
       $http.get(`${FirebaseURL}profiles.json?orderBy="uid"&equalTo="${profileId}"`)
       .success(profileObjFromFirebase => {
-
         const id = Object.keys(profileObjFromFirebase)[0]
         const profile = profileObjFromFirebase[id]
         profile.id = id
@@ -104,15 +100,25 @@ app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location, AuthFa
   }
 
   let getProfileByUserName = userName => {
-
     return $q((resolve, reject) => {
       $http.get(`${FirebaseURL}profiles.json?orderBy="userName"&equalTo="${userName}"`)
       .success(profileObjFromFirebase => {
-
         resolve(profileObjFromFirebase)
       })
       .error(error => {
         reject(error)
+      })
+    })
+  }
+
+  let deletePartyInvite = (profileId, currentStatus, rsvpKey) => {
+    return $q((resolve, reject) => {
+      $http.delete(`${FirebaseURL}profiles/${profileId}/${currentStatus}/${rsvpKey}.json`)
+      .success(party => {
+        resolve(party)
+      })
+      .error(error => {
+      reject(error)
       })
     })
   }
@@ -126,7 +132,8 @@ app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location, AuthFa
     getProfileById,
     getProfileByUserName,
     postPartyInvite,
-    changePartyInvite
+    changePartyInvite,
+    deletePartyInvite
   }
 
 })
