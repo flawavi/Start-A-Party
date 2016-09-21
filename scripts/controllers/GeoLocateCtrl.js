@@ -33,6 +33,13 @@ app.controller("GeoLocateCtrl", function(
     })
   }
 
+  $scope.notInviteYet = () => {
+    PartyFactory.patchParty($routeParams.id, {lat, long})
+    .then(()=>{
+      $location.url("/my-profile")
+    })
+  }
+
   $scope.message = "hello"
 
   $scope.map = { center: { latitude: 11.8251, longitude: 42.5903 }, zoom: 8}

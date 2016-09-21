@@ -1,11 +1,13 @@
 <h1>Party Forever</h1>
-<div id="map_canvas">
-    <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options">
-        <ui-gmap-marker coords="marker.coords" idkey="marker.id">
-        </ui-gmap-marker>
-    </ui-gmap-google-map>
-    <button class="btn btn-success" ng-click="initMap()">Start A Party</button>
-    <button class="btn btn-warning" ng-click="invite()" ng-disabled="!geolocated">Create Invitations</button>
-    <div ng-cloak>
-    </div>
+<div>
+  <div id="map_canvas">
+      <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="options">
+          <ui-gmap-marker coords="marker.coords" idkey="marker.id">
+          </ui-gmap-marker>
+      </ui-gmap-google-map>
+  </div>
+  <button class="btn btn-success" ng-click="initMap()">Start A Party</button>
+  <br>
+  <button class="btn btn-warning" ng-click="invite()" ng-disabled="!geolocated">Create Invitations</button>
+  <button class="btn btn-info"> <a class="invite-party-people" href="#/my-profile">No Invitations Just Yet</a></button>
 </div>
