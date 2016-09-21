@@ -66,6 +66,7 @@ app.controller("PartyCtrl", function(
     })
   }
 
+
   // $scope.deleteParty = () => {
   //   const currentRsvp = $scope.rsvp
   //   const rsvpKey = getRSVPKey()
