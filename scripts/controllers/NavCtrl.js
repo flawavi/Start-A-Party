@@ -12,7 +12,7 @@ app.controller("NavCtrl", function(
   $scope.userName = "Signed in as " + AuthFactory.currentUser.userName
 
   $scope.logout = () => {
-    console.log("LOGMEOUT")
+
     AuthFactory.logoutUser().then(data => {
       $scope.isLoggedIn = false;
       if(data) {
@@ -21,13 +21,13 @@ app.controller("NavCtrl", function(
         $window.location.href = "#/login"
       }
       $location.url("/login")
-      console.log("data", data)
+
     })
   }
 
   const currentProfile = () => {
     return AuthFactory.currentUser().then(user => {
-      console.log("USER", user)
+
       ProfileFactory.getProfileById(user.uid)
       .then((user)=>{
         $scope.userName = user.userName

@@ -1,7 +1,7 @@
 "use strict"
 
 app.controller("ProfileCtrl", function($scope, ProfileFactory, $location, currentUser){
-  console.log(currentUser, "CURRENTUSER")
+
 
   $scope.title = "Create a profile"
 
@@ -13,10 +13,10 @@ app.controller("ProfileCtrl", function($scope, ProfileFactory, $location, curren
   }
 
   $scope.createProfile = () => {
-    console.log("create profile hello")
+
     ProfileFactory.postProfile($scope.newUserProfile)
     .then(() => {
-      console.log($scope.newUserProfile, "newUserProfile")
+
       $location.url("/my-profile")
     })
   }

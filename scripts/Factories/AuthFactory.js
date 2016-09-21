@@ -25,7 +25,7 @@ app.factory("AuthFactory", function() {
   let currentUser = () => {
     return new Promise ((resolve, reject) => {
       firebase.auth().onAuthStateChanged(user => {
-        console.log("onAuthStateChanged resolves with ", user)
+
         loggedInUser = user;
         resolve(user)
       }, error => {
