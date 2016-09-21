@@ -12,7 +12,7 @@ app.controller("GeoLocateCtrl", function(
   )
 {
 
-  console.log(currentParty, "CURRENT PARTY")
+
 
   let lat = 11.8251
   let long = 42.5903
@@ -79,8 +79,8 @@ app.controller("GeoLocateCtrl", function(
   }, 1000)
 
   $scope.initMap = function initMap() {
-    console.log("are we working?")
-    console.log(navigator.geolocation)
+
+
 
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(position) {

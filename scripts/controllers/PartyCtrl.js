@@ -8,8 +8,7 @@ app.controller("PartyCtrl", function(
   PartyFactory,
   ProfileFactory,
   currentProfile
-  )
-{
+  ){
 
   $scope.map = { center: { latitude: currentParty.lat, longitude: currentParty.long }, zoom: 20}
   $scope.partyName = currentParty.partyName
@@ -72,8 +71,8 @@ app.controller("PartyCtrl", function(
 
     PartyFactory.changePartyRSVP(
       $routeParams.id,//partyId
-      currentProfile.id,
-      currentProfile.userName,
+      currentProfile.id,//current user id
+      currentProfile.userName,//current user username
       rsvpKey,//current party invitation key
       currentRsvp,//existing status
       newRsvp//new status
@@ -86,7 +85,6 @@ app.controller("PartyCtrl", function(
         currentRsvp,
         newRsvp
       ).then(profileResult => {
-
         delete currentParty[currentRsvp][rsvpKey]//removes rsvp key from object
         if (!currentParty[newRsvp]) currentParty[newRsvp] = {}//creates new "attending" list if one doesn't already exist
         currentParty[newRsvp][partyResult.name] = {//adds user to new list
@@ -96,7 +94,7 @@ app.controller("PartyCtrl", function(
         delete currentProfile[currentRsvp][inviteKey]
         if (!currentProfile[newRsvp]) currentProfile[newRsvp] = {}//creates new "attending" list if one doesn't already exist
         currentProfile[newRsvp][profileResult.name] = {//adds user to new list
-          partyId: currentParty.id,
+          partyId: $routeParams.id,
           partyName: currentParty.partyName
         }
         refreshInvitees()

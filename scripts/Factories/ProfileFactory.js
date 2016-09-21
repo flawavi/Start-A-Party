@@ -8,7 +8,7 @@ app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location, AuthFa
       $http.post(`${FirebaseURL}/profiles.json`,
       JSON.stringify(newProfile))
       .success(objFromFirebase => {
-        console.log(objFromFirebase, "new Profile object")
+
         resolve(objFromFirebase)
       })
       .error((error) => {
@@ -39,7 +39,7 @@ app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location, AuthFa
       $http.post(`${FirebaseURL}profiles/${guestId}/${status}.json`,
       JSON.stringify({partyId, partyName}))
       .success(partyObjFromFirebase => {
-        console.log(partyObjFromFirebase, "new Party Invite")
+
         resolve(partyObjFromFirebase)
       })
       .error((error) => {
@@ -50,7 +50,7 @@ app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location, AuthFa
 
   let changePartyInvite = (guestId, partyId, partyName, rsvpKey, currentStatus, newStatus) => {
     return $q((resolve, reject) => {
-      console.log('>>>>>changePartyInvite', currentStatus, rsvpKey, guestId)
+
       $http.delete(`${FirebaseURL}profiles/${guestId}/${currentStatus}/${rsvpKey}.json`)
       .success(() => {
         resolve(postPartyInvite(guestId, partyId, partyName, newStatus))
@@ -76,22 +76,22 @@ app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location, AuthFa
 
   let deleteProfile = profileId => {
     profileId = AuthFactory.getUser().uid
-    console.log(profileId)
+
     return $q((resolve) => {
       $http.delete(`${FirebaseURL}profiles/${profileId}.json`)
       .success(profileObjFromFirebase => {
-        console.log(profileObjFromFirebase)
+
         resolve(profileObjFromFirebase)
       })
     })
   }
 
   let getProfileById = profileId => {
-    console.log(profileId, "profileId")
+
     return $q((resolve, reject) => {
       $http.get(`${FirebaseURL}profiles.json?orderBy="uid"&equalTo="${profileId}"`)
       .success(profileObjFromFirebase => {
-        console.log(profileObjFromFirebase)
+
         const id = Object.keys(profileObjFromFirebase)[0]
         const profile = profileObjFromFirebase[id]
         profile.id = id
@@ -104,11 +104,11 @@ app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location, AuthFa
   }
 
   let getProfileByUserName = userName => {
-    console.log(userName, "userName")
+
     return $q((resolve, reject) => {
       $http.get(`${FirebaseURL}profiles.json?orderBy="userName"&equalTo="${userName}"`)
       .success(profileObjFromFirebase => {
-        console.log(profileObjFromFirebase, "profile from firebase")
+
         resolve(profileObjFromFirebase)
       })
       .error(error => {

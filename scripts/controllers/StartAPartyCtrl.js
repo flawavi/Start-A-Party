@@ -24,10 +24,10 @@ app.controller("StartAPartyCtrl", function($scope, $location, uiGmapGoogleMapApi
   }
 
   $scope.startParty = () => {
-    console.log("party party party")
+
     PartyFactory.postParty($scope.newParty)
     .then(party => {
-      console.log(party, "newParty")
+
       $location.url(`/geolocate/${party.name}`)
     })
   }

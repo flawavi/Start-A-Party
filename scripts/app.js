@@ -18,7 +18,7 @@ const currentParty = ($route, PartyFactory) => {
 }
 const currentProfile = ($route, AuthFactory, ProfileFactory) => {
   return AuthFactory.currentUser().then(user => {
-    console.log("USER", user)
+
     return ProfileFactory.getProfileById(user.uid)
   })
 }
@@ -132,7 +132,7 @@ app.run(function($rootScope, $location) {
 app.run(function($rootScope, $location) {
   $rootScope.$on("$routeChangeError", (evt, curr, prev, err) => {
     if (!err || err.message !== 'CURRENT_USER') return
-    console.log('DAFUQ', curr, prev, err)
+
     if (!curr.$$route || !curr.$$route.redirectAuth) return
     $location.path(curr.$$route.redirectAuth)
   })

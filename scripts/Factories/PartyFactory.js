@@ -8,7 +8,7 @@ app.factory("PartyFactory", function($q, $http, FirebaseURL, AuthFactory){
       $http.post(`${FirebaseURL}parties.json`,
       JSON.stringify(newParty))
       .success((partyObjFromFirebase) => {
-        console.log(partyObjFromFirebase, "new Party")
+
         resolve(partyObjFromFirebase)
       })
       .error((error) => {
@@ -22,7 +22,7 @@ app.factory("PartyFactory", function($q, $http, FirebaseURL, AuthFactory){
       $http.patch(`${FirebaseURL}parties/${partyId}.json`,
       JSON.stringify(updatedParty))
       .success((partyObjFromFirebase) => {
-        console.log(updatedParty, "updated Party")
+
         resolve(partyObjFromFirebase)
       })
       .error((error) => {
@@ -71,7 +71,7 @@ app.factory("PartyFactory", function($q, $http, FirebaseURL, AuthFactory){
       $http.post(`${FirebaseURL}parties/${partyId}/${status}.json`,
       JSON.stringify({guestId, userName}))
       .success((partyObjFromFirebase) => {
-        console.log(partyObjFromFirebase, "new Guest")
+
         resolve(partyObjFromFirebase)
       })
       .error((error) => {
