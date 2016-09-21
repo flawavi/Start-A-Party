@@ -37,7 +37,7 @@ app.config(function($routeProvider){
   .when("/login", {
     templateUrl: "partials/login.html",
     controller: "LoginCtrl",
-    redirectAuth: "/profile",
+    redirectAuth: "/my-profile",
     resolve: {
       redirectCurrentUser
     }

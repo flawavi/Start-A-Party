@@ -27,17 +27,14 @@ app.controller("MyProfileCtrl", function(
     ProfileFactory.getProfileById($scope.profileID)
     .then(response => {
       for (var key in response) {
-
         $scope.newUserProfile = response[key];
       }
     });
   }
 
   $scope.editProfile = () => {
-
     ProfileFactory.patchProfile($scope.newUserProfile)
     .then(() => {
-
       $location.url("profile")
     })
   }

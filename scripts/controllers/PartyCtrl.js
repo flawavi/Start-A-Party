@@ -11,6 +11,13 @@ app.controller("PartyCtrl", function(
   currentProfile
   ){
 
+  $scope.isOwner = null
+  const checkIfOwner = () => {
+    if (currentParty.ownerID === currentProfile.uid) {
+      $scope.isOwner = true
+    }
+  }
+  checkIfOwner()
   $scope.map = { center: { latitude: currentParty.lat, longitude: currentParty.long }, zoom: 20}
   $scope.partyName = currentParty.partyName
   $scope.party = currentParty

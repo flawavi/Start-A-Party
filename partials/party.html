@@ -6,7 +6,7 @@
     <p>THEME: {{party.theme}}</p>
     <p>WHERE: {{party.location}}</p>
     <p>LEAVE: {{party.finishTime}}</p>
-    <button class="btn btn-danger" ng-click="deleteParty()">Delete Party</button>
+    <button ng-show="isOwner" class="btn btn-danger" ng-click="deleteParty()">Delete Party</button>
   </div>
 </div>
 <div class="inviteeStatus">
@@ -30,8 +30,8 @@
   </div>
   <div ng-show="rsvp">
     <p>RSVP: {{rsvp}}</p>
-    <button ng-disabled="rsvp === 'attending'" ng-click="changeRSVP('attending')">Attend</button>
-    <button ng-disabled="rsvp === 'declined'" ng-click="changeRSVP('declined')">Decline</button>
+    <button class="btn btn-success" ng-disabled="rsvp === 'attending'" ng-click="changeRSVP('attending')">Attend</button>
+    <button class="btn btn-info" ng-disabled="rsvp === 'declined'" ng-click="changeRSVP('declined')">Decline</button>
   </div>
 
   <div  ng-show="owner">
