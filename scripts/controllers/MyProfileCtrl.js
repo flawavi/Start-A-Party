@@ -7,8 +7,8 @@ app.controller("MyProfileCtrl", function(
   ownerParties,
   ProfileFactory,
   currentProfile
-  )
-{
+  ){
+
 
   $scope.invitedCount = Object.keys(currentProfile.invited || {}).length
   $scope.attendingCount = Object.keys(currentProfile.attending || {}).length
@@ -17,12 +17,9 @@ app.controller("MyProfileCtrl", function(
   $scope.title = "Profile"
   $scope.parties = "Parties"
   $scope.profile = currentProfile
-
   $scope.ownerParties = ownerParties
 
-
   $scope.deleteProfile = () => {
-
     ProfileFactory.deleteProfile($scope.profileID)
     ProfileFactory.getProfileById($scope.profileID)
     .then(response => {
@@ -32,16 +29,14 @@ app.controller("MyProfileCtrl", function(
     });
   }
 
-  $scope.editProfile = () => {
-    ProfileFactory.patchProfile($scope.newUserProfile)
-    .then(() => {
-      $location.url("profile")
-    })
-  }
-
   $scope.goToPartyForm = () => {
     $location.url("party-form")
   }
 
-
+  // $scope.editProfile = () => {
+  //   ProfileFactory.patchProfile($scope.newUserProfile)
+  //   .then(() => {
+  //     $location.url("profile")
+  //   })
+  // }
 })

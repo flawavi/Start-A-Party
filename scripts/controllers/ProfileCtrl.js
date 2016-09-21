@@ -3,7 +3,7 @@
 app.controller("ProfileCtrl", function($scope, ProfileFactory, $location, currentUser){
 
 
-  $scope.title = "Create a profile"
+  $scope.title = "Create a Party Profile"
 
   $scope.newUserProfile = {
     name: "",

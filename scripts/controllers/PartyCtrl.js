@@ -11,18 +11,22 @@ app.controller("PartyCtrl", function(
   currentProfile
   ){
 
+
   $scope.isOwner = null
-  const checkIfOwner = () => {
-    if (currentParty.ownerID === currentProfile.uid) {
-      $scope.isOwner = true
-    }
-  }
-  checkIfOwner()
   $scope.map = { center: { latitude: currentParty.lat, longitude: currentParty.long }, zoom: 20}
   $scope.partyName = currentParty.partyName
   $scope.party = currentParty
   $scope.partyID = $routeParams.id
   $scope.owner = AuthFactory.getUser().uid === currentParty.ownerID
+
+  const checkIfOwner = (partyID, ownerID) => {
+    partyID = currentParty.ownerID
+    ownerID = currentProfile.uid
+    if (partyID === ownerID) {
+      $scope.isOwner = true
+    }
+  }
+  checkIfOwner()
 
   $scope.marker = {
     coords: {
@@ -32,11 +36,6 @@ app.controller("PartyCtrl", function(
     id: 0
   }
 
-  $scope.deleteParty = () => {
-    console.log("clicked", "partyId")
-    PartyFactory.deleteParty($scope.partyID)
-    $location.url("/party-form")
-  }
 
   const refreshInvitees = () => {
     $scope.invitedCount = Object.keys(currentParty.invited || {}).length
@@ -66,6 +65,15 @@ app.controller("PartyCtrl", function(
       return currentParty[rsvp][key].guestId === currentProfile.id
     })
   }
+
+  // $scope.deleteParty = () => {
+  //   const currentRsvp = $scope.rsvp
+  //   const rsvpKey = getRSVPKey()
+
+  //   PartyFactory.deleteParty($scope.partyID)
+  //   .then(ProfileFactory.deletePartyInvite(/*profileID*/, currentRsvp, rsvpKey))
+  //   $location.url("/party-form")
+  // }
 
   const getInviteKey = () => {
     const rsvp = getRSVPStatus()

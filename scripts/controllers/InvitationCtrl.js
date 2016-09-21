@@ -12,7 +12,7 @@ app.controller("InvitationCtrl", function(
 {
   // $scope.searchText = SearchProfiles;
 
-
+  console.log(currentParty)
   $scope.message = "Who gon' be @ dis pardee??"
   $scope.userName = ""
   $scope.inviteeID = null
