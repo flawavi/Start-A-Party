@@ -13,7 +13,7 @@ app.controller("NavCtrl", function(
     ProfileFactory.getProfileById(user.uid)
     .then(profile => {
       $scope.isLoggedIn = true
-      $scope.userName = "Signed in as " + profile.userName
+      $scope.userName = "Welcome to the party, " + profile.userName
     })
   })
 
