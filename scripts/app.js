@@ -101,6 +101,16 @@ app.config(function($routeProvider){
       currentProfile
     }
   })
+  .when("/supplies", {
+    templateUrl: "partials/supplies.html",
+    controller: "SuppliesCtrl"
+    // resolve: {
+    //   currentUser,
+    //   requireCurrentUser,
+    //   currentParty,
+    //   currentProfile
+    // }
+  })
   .otherwise("/")
 })
 
