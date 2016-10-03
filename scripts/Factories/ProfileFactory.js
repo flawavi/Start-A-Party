@@ -75,7 +75,6 @@ app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location, AuthFa
   }
 
   let deleteProfile = profileId => {
-    profileId = AuthFactory.getUser().uid
     return $q((resolve) => {
       $http.delete(`${FirebaseURL}profiles/${profileId}.json`)
       .success(profileObjFromFirebase => {

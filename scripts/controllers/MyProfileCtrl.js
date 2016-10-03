@@ -20,13 +20,12 @@ app.controller("MyProfileCtrl", function(
   $scope.ownerParties = ownerParties
 
   $scope.deleteProfile = () => {
-    ProfileFactory.deleteProfile($scope.profileID)
-    ProfileFactory.getProfileById($scope.profileID)
-    .then(response => {
-      for (var key in response) {
-        $scope.newUserProfile = response[key];
-      }
-    });
+    alert("Are you sure you want to delete your profile?")
+    ProfileFactory.deleteProfile($scope.profile.id)
+    .then(()=>{
+      console.log("profile deleted")
+      $location.url("/profile")
+    })
   }
 
   $scope.goToPartyForm = () => {
