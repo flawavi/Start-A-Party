@@ -29,6 +29,8 @@ const ownerParties = (AuthFactory, PartyFactory) => {
   })
 }
 
+const partySupplies = ()
+
 app.config(function($routeProvider){
   $routeProvider
   .when("/", {
@@ -101,15 +103,15 @@ app.config(function($routeProvider){
       currentProfile
     }
   })
-  .when("/supplies", {
+  .when("/supplies/:id", {
     templateUrl: "partials/supplies.html",
-    controller: "SuppliesCtrl"
-    // resolve: {
-    //   currentUser,
-    //   requireCurrentUser,
-    //   currentParty,
-    //   currentProfile
-    // }
+    controller: "SuppliesCtrl",
+    resolve: {
+      currentUser,
+      requireCurrentUser,
+      currentParty,
+      currentProfile
+    }
   })
   .otherwise("/")
 })

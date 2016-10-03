@@ -17,8 +17,8 @@ app.factory("ProfileFactory", function($q, $http, FirebaseURL, $location, AuthFa
     })
   }
 
-    let getProfiles = () => {
-      let profiles = []
+  let getProfiles = () => {
+    let profiles = []
     return $q((resolve, reject) => {
       $http.get(`${FirebaseURL}profiles.json`)
       .success(profileObj => {

@@ -8,9 +8,11 @@ app.controller("PartyCtrl", function(
   currentParty,
   PartyFactory,
   ProfileFactory,
-  currentProfile
+  currentProfile,
+  SuppliesFactory
   ){
 
+  console.log(SuppliesFactory.getSupplies())
 
   $scope.isOwner = null
   $scope.map = { center: { latitude: currentParty.lat, longitude: currentParty.long }, zoom: 20}
@@ -27,6 +29,11 @@ app.controller("PartyCtrl", function(
     }
   }
   checkIfOwner()
+
+  $scope.goToSupplies = () => {
+    console.log("testing")
+    $location.url(`/supplies/${$scope.partyID}`)
+  }
 
   $scope.marker = {
     coords: {

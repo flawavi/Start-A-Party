@@ -9,6 +9,12 @@
     <button ng-show="isOwner" class="btn btn-danger" ng-click="deleteParty()">Delete Party</button>
   </div>
 </div>
+
+<div class="supplies">
+  <div ng-repeat="supply in supplies">
+    <p>{{supply}}</p>
+  </div>
+</div>
 <div class="inviteeStatus">
   <div>
     <p>INVITED: {{invitedCount}}</p>
@@ -38,7 +44,7 @@
     <button class="btn btn-success"><a class="invite-party-people" ng-href="/#/invite/{{partyID}}">Invite Party People</a></button>
   </div>
   <div>
-    <button class="btn btn-success"><a ng-href="/#/supplies">Supplies</a></button>
+    <button class="btn btn-success" ng-click="goToSupplies()">Supplies</button>
   </div>
 </div>
 

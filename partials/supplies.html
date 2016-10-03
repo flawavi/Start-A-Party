@@ -1,56 +1,58 @@
 <h1>{{title}}</h1>
 
-
 <div>
-  <label>Beverages</label>
   <div>
-    <label><input type="checkbox" name="Beer" id="beer">Beer</label>
-    <label><input type="checkbox" name="Wine" id="wine">Wine</label>
-    <label><input type="checkbox" name="Liquor" id="liquor">Liquor</label>
-    <label><input type="checkbox" name="Cordials" id="cordials">Cordials</label>
-    <label><input type="checkbox" name="Water" id="water">Water</label>
-    <label><input type="checkbox" name="Soda" id="soda">Soda</label>
-    <label><input type="checkbox" name="Juice" id="juice">Juice</label>
-    <label><input type="checkbox" name="Mixers" id="mixers">Mixers</label>
+    <label><h3>Beverages</h3></label>
+    <div>
+      <label for="beer"><input type="checkbox" ng-model="supplies.beer" name="Beer" id="beer">Beer</label>
+      <label for="wine"><input type="checkbox" ng-model="supplies.wine" name="Wine" id="wine">Wine</label>
+      <label for="liquor"><input type="checkbox" ng-model="supplies.liquor" name="Liquor" id="liquor">Liquor</label>
+      <label for="cordials"><input type="checkbox" ng-model="supplies.cordials" name="Cordials" id="cordials">Cordials</label>
+      <label for="water"><input type="checkbox" ng-model="supplies.water" name="Water" id="water">Water</label>
+      <label for="soda"><input type="checkbox" ng-model="supplies.soda" name="Soda" id="soda">Soda</label>
+      <label for="juice"><input type="checkbox" ng-model="supplies.juice" name="Juice" id="juice">Juice</label>
+      <label for="mixers"><input type="checkbox" ng-model="supplies.mixers" name="Mixers" id="mixers">Mixers</label>
+    </div>
+  </div>
+
+  <div>
+  <label><h3>Food</h3></label>
+    <div>
+      <label for="chips"><input type="checkbox" ng-model="supplies.chips" name="Chips" id="chips">Chips</label>
+      <label for="burgers"><input type="checkbox" ng-model="supplies.burgers" name="Burgers" id="burgers">Burgers</label>
+      <label for="buns"><input type="checkbox" ng-model="supplies.buns" name="Buns" id="buns">Buns</label>
+      <label for="condiments"><input type="checkbox" ng-model="supplies.condiments" name="Condiments" id="condiments">Condiments</label>
+      <label for="veggies"><input type="checkbox" ng-model="supplies.veggies" name="Veggies" id="veggies">Veggie Tray</label>
+      <label for="fruit"><input type="checkbox" ng-model="supplies.fruit" name="Fruit" id="fruit">Fruit</label>
+      <label for="cookies"><input type="checkbox" ng-model="supplies.cookies" name="Cookies" id="cookies">Cookies</label>
+      <label for="nuts"><input type="checkbox" ng-model="supplies.nuts" name="Nuts" id="nuts">Nuts</label>
+    </div>
+  </div>
+
+  <div>
+  <label><h3>Music</h3></label>
+    <div>
+      <label for="speakers"><input type="checkbox" ng-model="supplies.speakers" name="Speakers" id="speakers">Speakers</label>
+      <label for="turntables"><input type="checkbox" ng-model="supplies.turntables" name="Turntables" id="turntables">Turntables</label>
+      <label for="records"><input type="checkbox" ng-model="supplies.records" name="Records" id="records">Records</label>
+      <label for="mp3"><input type="checkbox" ng-model="supplies.mp3" name="MP3" id="mp3">MP3 Player</label>
+      <label for="power"><input type="checkbox" ng-model="supplies.power" name="Power" id="power">Power Cords</label>
+      <label for="mics"><input type="checkbox" ng-model="supplies.mics" name="Mics" id="mics">Mics</label>
+      <label for="cables"><input type="checkbox" ng-model="supplies.cables" ame="Cables" id="cables">Cables</label>
+    </div>
+  </div>
+
+  <div>
+  <label><h3>Decorations</h3></label>
+    <div>
+      <label for="balloons"><input type="checkbox" ng-model="supplies.balloons" name="Balloons" id="balloons">Balloons</label>
+      <label for="streamers"><input type="checkbox" ng-model="supplies.streamers" name="Streamers" id="streamers">Streamers</label>
+      <label for="hats"><input type="checkbox" ng-model="supplies.hats" name="Hats" id="hats">Hats</label>
+      <label for="decals"><input type="checkbox" ng-model="supplies.decals" name="Decals" id="decals">Decals</label>
+    </div>
   </div>
 </div>
 
 <div>
-<label>Food</label>
-  <div>
-    <label><input type="checkbox" name="Chips" id="chips">Chips</label>
-    <label><input type="checkbox" name="Burgers" id="burgers">Burgers</label>
-    <label><input type="checkbox" name="Buns" id="buns">Buns</label>
-    <label><input type="checkbox" name="Condiments" id="condiments">Condiments</label>
-    <label><input type="checkbox" name="Veggies" id="veggies">Veggie Tray</label>
-    <label><input type="checkbox" name="Fruit" id="fruit">Fruit</label>
-    <label><input type="checkbox" name="Cookies" id="cookies">Cookies</label>
-    <label><input type="checkbox" name="Nuts" id="nuts">Nuts</label>
-  </div>
+  <button type="" class="btn btn-success" ng-click="postSupplies()">Post Supplies</button>
 </div>
-
-<div>
-<label>Music</label>
-  <div>
-    <label><input type="checkbox" name="Speakers" id="speakers">Speakers</label>
-    <label><input type="checkbox" name="Turntables" id="turntables">Turntables</label>
-    <label><input type="checkbox" name="Records" id="records">Records</label>
-    <label><input type="checkbox" name="MP3" id="mp3">MP3 Player</label>
-    <label><input type="checkbox" name="Power" id="power">Power Cords</label>
-    <label><input type="checkbox" name="Mics" id="mics">Mics</label>
-    <label><input type="checkbox" name="Cables" id="cables">Cables</label>
-  </div>
-</div>
-
-<div>
-<label>Decorations</label>
-  <div>
-    <label><input type="checkbox" name="Balloons" id="balloons">Balloons</label>
-    <label><input type="checkbox" name="Streamers" id="streamers">Streamers</label>
-    <label><input type="checkbox" name="Hats" id="hats">Hats</label>
-    <label><input type="checkbox" name="Decals" id="decals">Decals</label>
-  </div>
-</div>
-
-
-<button type="" class="btn btn-default" ng-click="createSuppliesList()">Party On</button>
