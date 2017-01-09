@@ -1,7 +1,12 @@
 "use strict"
 
-app.controller("ProfileCtrl", function($scope, ProfileFactory, $location, currentUser){
-
+app.controller("ProfileCtrl", function(
+  $scope,
+  $window,
+  $location,
+  currentUser,
+  ProfileFactory
+){
 
   $scope.title = "Create a Party Profile"
 
@@ -13,11 +18,10 @@ app.controller("ProfileCtrl", function($scope, ProfileFactory, $location, curren
   }
 
   $scope.createProfile = () => {
-
     ProfileFactory.postProfile($scope.newUserProfile)
     .then(() => {
-
       $location.url("/my-profile")
+      $window.location.reload()
     })
   }
 

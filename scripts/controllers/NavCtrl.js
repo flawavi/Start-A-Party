@@ -9,9 +9,15 @@ app.controller("NavCtrl", function(
   ){
 
   $scope.isLoggedIn = false
+  $scope.notLoggedIn = true
   AuthFactory.currentUser().then(user => {
+    if(user === null){
+      $scope.pleaseCreateAccount = "Please create an account to start partying."
+      return $scope.pleaseCreateAccount
+    }
     ProfileFactory.getProfileById(user.uid)
     .then(profile => {
+      $scope.notLoggedIn = false
       $scope.isLoggedIn = true
       $scope.userName = "Welcome to the party, " + profile.userName
     })
@@ -29,9 +35,5 @@ app.controller("NavCtrl", function(
     })
   }
 
-
   $scope.isActive = viewLocation => viewLocation === $location.path();
-
-
-
 });

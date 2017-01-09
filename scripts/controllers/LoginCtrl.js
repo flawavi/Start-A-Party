@@ -9,22 +9,19 @@ app.controller("LoginCtrl", function($scope, $window, AuthFactory){
   }
 
   $scope.register = () => {
-
     AuthFactory.createUser({
       email: $scope.account.email,
       password: $scope.account.password
     })
     .then((userData)=>{
-
       $scope.loginFirstTime()
     },
     (error) => {
-
+      console.log(error)
     })
   }
 
   $scope.loginFirstTime = () => {
-
     AuthFactory.loginUser({
       email: $scope.account.email,
       password: $scope.account.password
@@ -35,15 +32,13 @@ app.controller("LoginCtrl", function($scope, $window, AuthFactory){
       } else {
         $window.location.href = "#/login"
       }
-
     },
-    (error) => {
-
+    error => {
+      console.log(error)
     })
   }
 
   $scope.login = () => {
-
     AuthFactory.loginUser({
       email: $scope.account.email,
       password: $scope.account.password
@@ -54,10 +49,9 @@ app.controller("LoginCtrl", function($scope, $window, AuthFactory){
       } else {
         $window.location.href = "#/login"
       }
-
     },
-    (error) => {
-
+    error => {
+      console.log(error)
     })
   }
 })

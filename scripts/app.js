@@ -18,7 +18,6 @@ const currentParty = ($route, PartyFactory) => {
 }
 const currentProfile = ($route, AuthFactory, ProfileFactory) => {
   return AuthFactory.currentUser().then(user => {
-
     return ProfileFactory.getProfileById(user.uid)
   })
 }
