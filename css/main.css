@@ -1,0 +1,72 @@
+.angular-google-map-container {
+  height: 400px; }
+
+.invite-party-people {
+  color: white;
+  text-decoration: none; }
+
+.invite-party-people:hover {
+  color: white;
+  text-decoration: none; }
+
+.partyDetails {
+  float: left;
+  margin-left: 10%; }
+
+.logout:hover {
+  cursor: pointer; }
+
+.inviteeStatus {
+  float: right;
+  margin-right: 10%;
+  margin-bottom: 10px; }
+
+.profileInfo {
+  text-align: left;
+  margin-left: 5%; }
+
+.profileInfo h4 {
+  display: block; }
+
+/*html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}*/
+#map {
+  height: 100%;
+  width: 75%;
+  margin: 0 auto;
+  border: 10px solid lightgreen;
+  border-radius: 2%; }
+
+#map_canvas {
+  height: 100%;
+  width: 75%;
+  margin: 0 auto;
+  border: 10px solid lightgreen;
+  border-radius: 2%;
+  clear: both; }
+
+.profileForm {
+  float: left;
+  text-align: left;
+  margin-left: 10%; }
+
+.otherInfo {
+  float: right;
+  margin-right: 10%;
+  justify-content: left; }
+
+.otherInfo li {
+  list-style: none; }
+
+.myParties,
+.myProfile {
+  display: block; }
+
+.party-btn {
+  position: absolute;
+  bottom: 20%; }
+
+/*# sourceMappingURL=main.css.map */
